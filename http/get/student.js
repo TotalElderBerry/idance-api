@@ -2,7 +2,11 @@ const express = require('express')
 const app = express()
 
 app.get('/', (req,res) => {
-    res.send('getting all students')
+    const comscistudent = {
+        id: '1',
+        name: 'gian carlo'
+    }
+    res.send(comscistudent)
 })
 
 app.get('/:id', (req,res)=>{
