@@ -1,17 +1,14 @@
 const express = require('express');
-const { checkAPI, isAPIExist } = require("./network");
+const { isAPIExist } = require("./network");
+const studentGet = require('./http/get/student');
+const studentPost = require('./http/post/student');
+const studentPut = require('./http/put/student');
+const studentDelete = require('./http/delete/student');
 
 const app = express()
+app.use(express.json())
 
-app.all("/api/:id", (req, res, next) => {
-    const id = req.params.id;
-
-    if (!isAPIExist(id)) {
-        return;
-    }
-    
-    next();
-});
+app.use("/api/student",studentGet,studentPost,studentPut,studentDelete)
 
 app.listen(8000, ()=>{
     console.log('Listening in port 3000');
