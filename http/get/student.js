@@ -1,16 +1,19 @@
 const express = require('express')
+const studentModel = require('../../models/student')
 const app = express()
 
 app.get('/', (req,res) => {
-    const comscistudent = {
-        id: '1',
-        name: 'gian carlo'
-    }
-    res.send(comscistudent)
 })
 
+// error here, needs to be fixed
 app.get('/:id', (req,res)=>{
-    res.send('getting student with id '+req.params.id)
+    const id = req.params.id
+    const val = studentModel.getUserStudentbyId(id, (myErr, data) => {
+        if(myErr){
+            throw myErr
+        }
+        res.status(200).send(data)
+    })
 })
 
 

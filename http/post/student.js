@@ -1,9 +1,11 @@
 const express = require('express')
+const userModel = require('../../models/user')
+const studentModel = require('../../models/student')
 const app = express()
 
 app.post('/add', (req,res) => {
-    const {id,name} = req.body
-    res.send(`post a student ${id} with name ${name}`)
+    userModel.addUser(req.body)
+    studentModel.addStudent(req.body)
 })
 
 module.exports = app
