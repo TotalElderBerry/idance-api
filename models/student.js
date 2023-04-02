@@ -5,7 +5,7 @@ const studentModel = {}
 
 studentModel.addStudent = (newStudent) => {
     const {id, level} = newStudent;
-    const query = 'INSERT INTO Student (user_id, level) VALUES (?, ?)'
+    const query = 'INSERT INTO Student (user_id, level, isInstructor) VALUES (?, ?, 0)'
     db_conn.query(query, [id,level],(err, result) => {
         if(err) throw err
         console.log('Successfully inserted user data');

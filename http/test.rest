@@ -25,3 +25,41 @@ content-type: application/json
     "dance_description": "I am an experienced dancer",
     "dance_specialty": "Tiktok"
 }
+
+
+###
+GET http://localhost:8000/api/dance-class/instructor/11 HTTP/1.1
+Content-Type: application/json
+
+###
+
+POST http://localhost:8000/api/dance-class/add HTTP/1.1
+content-type: application/json
+
+{
+    "instructor_id": 2,
+    "dance_name": "Big boy 2",
+    "dance_genre": "Tiktok 3",
+    "dance_song": "sza 2",
+    "dance_difficulty": "easy2",
+    "date": "04/01/2023",
+    "location": "Talamban",
+    "price": "30 bucks",
+    "description": "I am an experienced dancer",
+    "student_limit": 30,
+    "image": "image.jpg",
+    "mode_of_payment": "GCash",
+    "account_name": "Kaldag",
+    "account_number": "12321"
+    
+}
+
+###
+
+GET http://localhost:8000/api/instructor/32/classes HTTP/1.1
+content-type: application/json
+
+###
+
+GET http://localhost:8000/api/dance-class/all HTTP/1.1
+content-type: application/json
