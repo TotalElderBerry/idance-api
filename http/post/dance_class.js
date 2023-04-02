@@ -9,5 +9,4 @@ app.post('/add', (req,res) => {
     danceClass.addDanceClass(instructor_id, newDanceClass)
 })
 
-
 module.exports = app

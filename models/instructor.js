@@ -11,7 +11,13 @@ instructorModel.addInstructor = (newInstructor) => {
         console.log(result);
         console.log('Successfully inserted new instructor data');
     })
+
+    const updateStudentQuery = `UPDATE Student set isInstructor = 1 where Student.user_id = ${user_id}`
+    db_conn.query(updateStudentQuery, (err, result) => {
+        if(err) throw err
+    })
 }
+
 
 instructorModel.getUserInstructorbyId = (id, cbResult) => {
     const query = `SELECT * from User INNER JOIN Instructor on Instructor.user_id = ${id}`
