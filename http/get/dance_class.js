@@ -5,7 +5,7 @@ const app = express()
 app.get('/all', (req,res) => {
     danceClass.getAllUpcomingDanceClass((myErr,data) => {
         if(myErr){
-            res.status(400).send(err)
+            return res.status(400).send(err)
         }
         res.status(200).send(data)
     })

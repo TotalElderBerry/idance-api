@@ -8,10 +8,6 @@ content-type: application/json
     "level": "Expert"
 }
 
-###
-
-GET http://localhost:8000/api/student/22 HTTP/1.1
-Content-Type: application/json
 
 
 ###
@@ -22,9 +18,10 @@ content-type: application/json
 {
     "user_id": 22,
     "rating": 5,
-    "dance_description": "I am an experienced dancer",
+    "description": "I am an experienced dancer",
     "dance_specialty": "Tiktok"
 }
+
 
 
 ###
@@ -33,21 +30,21 @@ Content-Type: application/json
 
 ###
 
-POST http://localhost:8000/api/dance-class/add HTTP/1.1
+POST http://localhost:8000/api/dance-class/add/live HTTP/1.1
 content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyMiwiaWF0IjoxNjgwNzQ4NTgyLCJleHAiOjE2ODA4MzQ5ODJ9.NHHD45UvrIKuYdXx8SHEGVqhOm0u_Wa87ODXO-GD4kM
 
 {
-    "instructor_id": 2,
+    "instructor_id": 17,
     "dance_name": "Big boy 2",
     "dance_genre": "Tiktok 3",
     "dance_song": "sza 2",
     "dance_difficulty": "easy2",
     "date": "04/01/2023",
     "location": "Talamban",
-    "price": "30 bucks",
+    "price": 300,
     "description": "I am an experienced dancer",
     "student_limit": 30,
-    "image": "image.jpg",
     "mode_of_payment": "GCash",
     "account_name": "Kaldag",
     "account_number": "12321"
@@ -56,10 +53,49 @@ content-type: application/json
 
 ###
 
-GET http://localhost:8000/api/instructor/32/classes HTTP/1.1
+POST http://localhost:8000/api/dance-class/add/recorded HTTP/1.1
 content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyMiwiaWF0IjoxNjgwNzQ4NTgyLCJleHAiOjE2ODA4MzQ5ODJ9.NHHD45UvrIKuYdXx8SHEGVqhOm0u_Wa87ODXO-GD4kM
+
+{
+    "instructor_id": 17,
+    "dance_name": "Big boy 2 Recorded",
+    "dance_genre": "Tiktok 3 Recorded",
+    "dance_song": "sza 2",
+    "dance_difficulty": "easy2 Recorded",
+    "price": 300,
+    "description": "I am an experienced dancer",
+    "youtube_link": "youtube.com",
+    "mode_of_payment": "GCash",
+    "account_name": "Kaldag",
+    "account_number": "12321"
+    
+}
+
+
+###
+GET http://localhost:8000/api/student/22 HTTP/1.1
+
+###
+
+GET http://localhost:8000/api/instructor/profile/me HTTP/1.1
+content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyMiwiaWF0IjoxNjgwNjY2NzI5LCJleHAiOjE2ODA3NTMxMjl9.fFPu3zWcRdsWTU75dpSZV8-QQfzrxZY1sndIrgqiSNY
+
 
 ###
 
 GET http://localhost:8000/api/dance-class/all HTTP/1.1
 content-type: application/json
+
+###
+
+POST https://pg-sandbox.paymaya.com/checkout/v1/checkouts HTTP/1.1
+accept: application/json
+content-Type: application/json
+Authorization: Basic cGstWjBPU3pMdkljT0kyVUl2RGhkVEdWVmZSU1NlaUdTdG5jZXF3VUU3bjBBaDo=
+
+{
+    "totalAmount": {"value":1000,"currency":"PHP"},
+    "requestReferenceNumber": "4fc10b93bdbd4f31b31d4575a3785009"
+}

@@ -23,7 +23,7 @@ instructorModel.getUserInstructorbyId = (id, cbResult) => {
     const query = `SELECT * from User INNER JOIN Instructor on Instructor.user_id = ${id}`
 
     db_conn.query(query,(err,res, fields) => {
-        if(err) throw err
+        if(err) cbResult(err,null)
         if(res.length) {
             cbResult(null,res)
             return
