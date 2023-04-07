@@ -90,6 +90,14 @@ content-type: application/json
 
 ###
 
+GET http://localhost:8000/api/dance-class/12 HTTP/1.1
+content-type: application/json
+
+{
+    "student_id": 12
+}
+###
+
 POST https://pg-sandbox.paymaya.com/checkout/v1/checkouts HTTP/1.1
 accept: application/json
 content-Type: application/json
@@ -98,4 +106,13 @@ Authorization: Basic cGstWjBPU3pMdkljT0kyVUl2RGhkVEdWVmZSU1NlaUdTdG5jZXF3VUU3bjB
 {
     "totalAmount": {"value":1000,"currency":"PHP"},
     "requestReferenceNumber": "4fc10b93bdbd4f31b31d4575a3785009"
+}
+
+###
+
+POST http://localhost:8000/api/attendance/class/4 HTTP/1.1
+content-type: application/json
+
+{
+    "student_id": "10"
 }

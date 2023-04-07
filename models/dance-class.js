@@ -70,8 +70,11 @@ danceClass.getAllUpcomingDanceClass = (callback) => {
         }
         console.log(res);
         const danceClassJson = {
-            classes: [
+            upcoming_classes: [
             ],
+            happening_today: [
+            ],
+            classes_done: []
         }
 
         for(const index in res){
@@ -80,42 +83,55 @@ danceClass.getAllUpcomingDanceClass = (callback) => {
             console.log(`Number of days between: ${formattedToday} and ${res[index].date}`);
             console.log(differenceOfDaysBetweenDates(formattedToday,res[index].date));
             const daysBetween = differenceOfDaysBetweenDates(formattedToday,res[index].date);
-            if(daysBetween >= 0){
-                const singleClassJson = {
-                    dance_id: `${res[index].dance_class_id}`,
-                    dance_name: `${res[index].dance_name}`,
-                    dance_genre: `${res[index].dance_genre}`,
-                    dance_song: `${res[index].dance_song}`,
-                    dance_difficulty: `${res[index].dance_difficulty}`,
-                    date: `${res[index].date}`,
-                    location: `${res[index].location}`,
-                    price: `${res[index].price}`,
-                    description: `${res[index].description}`,
-                    student_limit: `${res[index].student_limit}`
-                }
-                
-    
-                const instructorInfoJson = {
-                    instructor_id: `${res[index].instructor_id}`,
-                    first_name: `${res[index].first_name}`,
-                    last_name: `${res[index].last_name}`,
-                    dance_specialty: `${res[index].dance_specialty}`,
-                }    
-                
-    
-                const paymentDetailsJson = {
-                    payment_details_id: `${res[index].payment_details_id}`,
-                    mode_of_payment: `${res[index].mode_of_payment}`,
-                    account_name: `${res[index].account_name}`,
-                    account_number: `${res[index].account_number}`,
-                }
-                singleClassJson['instructor'] = instructorInfoJson
-                singleClassJson['payment'] = paymentDetailsJson
-                danceClassJson.classes.push(singleClassJson)
+            
+            const singleClassJson = {
+                dance_id: `${res[index].dance_class_id}`,
+                dance_name: `${res[index].dance_name}`,
+                dance_genre: `${res[index].dance_genre}`,
+                dance_song: `${res[index].dance_song}`,
+                dance_difficulty: `${res[index].dance_difficulty}`,
+                date: `${res[index].date}`,
+                location: `${res[index].location}`,
+                price: `${res[index].price}`,
+                description: `${res[index].description}`,
+                student_limit: `${res[index].student_limit}`
             }
+            
+
+            const instructorInfoJson = {
+                instructor_id: `${res[index].instructor_id}`,
+                first_name: `${res[index].first_name}`,
+                last_name: `${res[index].last_name}`,
+                dance_specialty: `${res[index].dance_specialty}`,
+            }    
+            
+
+            const paymentDetailsJson = {
+                payment_details_id: `${res[index].payment_details_id}`,
+                mode_of_payment: `${res[index].mode_of_payment}`,
+                account_name: `${res[index].account_name}`,
+                account_number: `${res[index].account_number}`,
+            }
+            singleClassJson['instructor'] = instructorInfoJson
+            singleClassJson['payment'] = paymentDetailsJson
+
+            switch (daysBetween) {
+                case 0:
+                    danceClassJson.happening_today.push(singleClassJson)
+                    break;
+                case 1:
+                    danceClass.upcoming_classes.push(singleClassJson)
+                    break;
+                default:
+                    danceClass.classes_done.push(singleClassJson)
+                    break;
+            }
+
         }
         callback(null,danceClassJson)
     })    
 }
+
+
 
 module.exports = danceClass

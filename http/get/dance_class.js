@@ -1,5 +1,6 @@
 const express = require('express')
 const danceClass = require('../../models/dance-class')
+const studentModel = require('../../models/student')
 const app = express()
 
 app.get('/all', (req,res) => {
@@ -12,7 +13,23 @@ app.get('/all', (req,res) => {
 })
 
 app.get('/:id', (req,res) => {
-    res.send('getting dance class id')
+    const dance_class_id = req.params.id
+    const {student_id} = req.body
+
+    try {
+        const studentClasses = studentModel.getStudentDanceClassbyId(student_id)
+        const classById = studentClasses.filter((danceclass) => danceclass.dance_class_id == dance_class_id)
+
+        if(!classById){
+            return res.send(
+                {"isBooked": false}
+            )
+        }
+    } catch (error) {
+        
+    }
+
+    return res.send({"isBooked": true})
 })
 
 
