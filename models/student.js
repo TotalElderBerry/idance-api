@@ -9,9 +9,9 @@ studentModel.addStudent = (newStudent) => {
     const query = 'INSERT INTO Student (user_id, level, isInstructor) VALUES (?, ?, 0)'
     db_conn.query(query, [id,level],(err, result) => {
         if(err) throw err
-        console.log('Successfully inserted user data');
+        console.log(result);
+        return result.insertId;
     })
-    return id;
 }
 
 studentModel.getUserStudentbyId = (id, cbResult) => {

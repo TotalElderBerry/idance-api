@@ -7,8 +7,22 @@ const app = express()
 app.get('/', (req,res) => {
 })
 
-// error here, needs to be fixed
 app.get('/:id', (req,res)=>{
+    const id = req.params.id
+    const val = studentModel.getUserStudentbyId(id, (myErr, data) => {
+        if(myErr != null){
+            res.status(400).send(myErr)
+            return
+        }
+        
+        res.status(200).send(data)
+    })
+})
+
+/**
+ * 
+ */
+app.get('/me/:id', (req,res)=>{
     const id = req.params.id
     const val = studentModel.getUserStudentbyId(id, (myErr, data) => {
         if(myErr != null){

@@ -7,7 +7,11 @@ content-type: application/json
     "lastName": "Lisondra",
     "gender": "M",
     "contactNumber" : "09154516111",
-    "emaileAddress": "test@gmail.com",
+    "emailAddress": "test@gmail.com",
     "dateOfBirth": "06/14/2001",
     "level": "Expert"
 }
+
+###
+GET http://localhost:8000/api/student/22 HTTP/1.1
+content-type: application/json
