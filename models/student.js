@@ -15,12 +15,13 @@ studentModel.addStudent = (newStudent) => {
 }
 
 studentModel.getUserStudentbyId = (id, cbResult) => {
-    const query = `SELECT * from User INNER JOIN Student on Student.user_id = ${id}`
+    const query = `SELECT * from User INNER JOIN Student on Student.user_id = '${id}'`
     db_conn.query(query, (err,res,fields)=>{
         if(err) {
             cbResult(err,null)
+            return
         }
-        if(res.length){
+        if(res){
             cbResult(null,res)
             return
         }

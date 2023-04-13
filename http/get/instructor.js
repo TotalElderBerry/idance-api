@@ -39,13 +39,13 @@ app.get('/:id/classes', (req,res) => {
 
 app.get('/profile/me', verifyInstructor ,(req,res) => {
     const id = req.user.user_id
-    console.log(req.user);
     instructorModel.getUserInstructorbyId(id,(myErr, data) => {
         if(data !== null){
             return res.status(200).send(data)
         }   
-        res.status(404).send(myErr)
+        return res.status(404).send(myErr)
     })
+    return
 })
 
 

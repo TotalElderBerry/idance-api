@@ -12,6 +12,29 @@ content-type: application/json
     "level": "Expert"
 }
 
+
 ###
-GET http://localhost:8000/api/student/22 HTTP/1.1
+
+POST http://localhost:8000/api/instructor/add HTTP/1.1
+content-type: application/json
+
+{
+    "user_id": "z6Z88m3EHZZs3BPAI9L4q98lRWD3",
+    "rating": "5",
+    "description": "tiktok",
+    "dance_specialty": "hiphip"
+}
+
+###
+GET http://localhost:8000/api/student/me/z6Z88m3EHZZs3BPAI9L4q98lRWD3 HTTP/1.1
+content-type: application/json
+
+###
+GET http://localhost:8000/api/instructor/profile/me HTTP/1.1
+content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiejZaODhtM0VIWlpzM0JQQUk5TDRxOThsUldEMyIsImlhdCI6MTY4MTM1NzQ5MiwiZXhwIjoxNjgxNDQzODkyfQ.QJzdw_gq3TGK-uyDhDzqYnTpSFu1tv2ZRlmmChUbGHY
+
+
+###
+GET http://localhost:8000/api/student/me/z6Z88m3EHZZs3BPAI9L4q98lRWD3 HTTP/1.1
 content-type: application/json

@@ -24,6 +24,7 @@ app.get('/:id', (req,res)=>{
  */
 app.get('/me/:id', (req,res)=>{
     const id = req.params.id
+    console.log(id);
     const val = studentModel.getUserStudentbyId(id, (myErr, data) => {
         if(myErr != null){
             res.status(400).send(myErr)
@@ -44,6 +45,7 @@ app.get('/me/:id', (req,res)=>{
         
         res.status(200).send(data)
     })
+        return
 })
 
 

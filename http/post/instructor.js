@@ -23,13 +23,13 @@ app.post('/add', (req,res) => {
                         }
                     )
                     req.body = {token: token}
-                        
+                        return
                     }catch(e){
-                        res.status(400).send(e)
+                        return res.status(400).send(e)
                     }
             }
         }else{
-            res.status(400).send({msg: 'account already exist'})
+            return res.status(400).send({msg: 'account already exist'})
         }
     })
    

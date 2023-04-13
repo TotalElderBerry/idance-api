@@ -24,6 +24,7 @@
     "jsonwebtoken": "^9.0.0",
     "mysql": "^2.18.1",
     "nodemon": "^2.0.22",
+    "qrcode": "^1.5.1",
     "sqlite3": "^5.1.6"
   }
 }

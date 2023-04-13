@@ -8,11 +8,13 @@ const verifyInstructor = (req,res, next) => {
     }
     
     try {
-        const token = authToken.split(" ")[1]
+        let token = authToken.split(" ")[1]
         console.log(token);
         const decoded = jwt.verify(token, SECRET_KEY);
         req.user = decoded;
+        return next();
     } catch (err) {
+        console.log(err)
         return res.status(401).send("Invalid Token");
     }
     return next();

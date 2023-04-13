@@ -1,13 +1,13 @@
--- MySQL dump 10.13  Distrib 8.0.32, for Linux (x86_64)
+-- MariaDB dump 10.19  Distrib 10.4.25-MariaDB, for Win64 (AMD64)
 --
 -- Host: localhost    Database: idancedb
 -- ------------------------------------------------------
--- Server version	8.0.32-0ubuntu0.22.04.2
+-- Server version	8.0.32
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!50503 SET NAMES utf8mb4 */;
+/*!40101 SET NAMES utf8mb4 */;
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
 /*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
@@ -16,40 +16,40 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `Attendance`
+-- Table structure for table `attendance`
 --
 
-DROP TABLE IF EXISTS `Attendance`;
+DROP TABLE IF EXISTS `attendance`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `Attendance` (
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `attendance` (
   `student_id` int DEFAULT NULL,
   `live_danceclass_id` int DEFAULT NULL,
   `time` text,
   KEY `student_id` (`student_id`),
   KEY `live_danceclass_id` (`live_danceclass_id`),
-  CONSTRAINT `Attendance_ibfk_1` FOREIGN KEY (`student_id`) REFERENCES `Student` (`student_id`),
-  CONSTRAINT `Attendance_ibfk_2` FOREIGN KEY (`live_danceclass_id`) REFERENCES `LiveDanceClass` (`live_danceclass_id`)
+  CONSTRAINT `Attendance_ibfk_1` FOREIGN KEY (`student_id`) REFERENCES `student` (`student_id`),
+  CONSTRAINT `Attendance_ibfk_2` FOREIGN KEY (`live_danceclass_id`) REFERENCES `livedanceclass` (`live_danceclass_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `Attendance`
+-- Dumping data for table `attendance`
 --
 
-LOCK TABLES `Attendance` WRITE;
-/*!40000 ALTER TABLE `Attendance` DISABLE KEYS */;
-/*!40000 ALTER TABLE `Attendance` ENABLE KEYS */;
+LOCK TABLES `attendance` WRITE;
+/*!40000 ALTER TABLE `attendance` DISABLE KEYS */;
+/*!40000 ALTER TABLE `attendance` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `DanceBooking`
+-- Table structure for table `dancebooking`
 --
 
-DROP TABLE IF EXISTS `DanceBooking`;
+DROP TABLE IF EXISTS `dancebooking`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `DanceBooking` (
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `dancebooking` (
   `dance_booking_id` int NOT NULL AUTO_INCREMENT,
   `payment_id` int DEFAULT NULL,
   `student_id` int DEFAULT NULL,
@@ -59,29 +59,29 @@ CREATE TABLE `DanceBooking` (
   KEY `payment_id` (`payment_id`),
   KEY `student_id` (`student_id`),
   KEY `dance_class_id` (`dance_class_id`),
-  CONSTRAINT `DanceBooking_ibfk_1` FOREIGN KEY (`payment_id`) REFERENCES `Payment` (`payment_id`),
-  CONSTRAINT `DanceBooking_ibfk_2` FOREIGN KEY (`student_id`) REFERENCES `Student` (`student_id`),
-  CONSTRAINT `DanceBooking_ibfk_3` FOREIGN KEY (`dance_class_id`) REFERENCES `DanceClass` (`dance_class_id`)
+  CONSTRAINT `DanceBooking_ibfk_1` FOREIGN KEY (`payment_id`) REFERENCES `payment` (`payment_id`),
+  CONSTRAINT `DanceBooking_ibfk_2` FOREIGN KEY (`student_id`) REFERENCES `student` (`student_id`),
+  CONSTRAINT `DanceBooking_ibfk_3` FOREIGN KEY (`dance_class_id`) REFERENCES `danceclass` (`dance_class_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `DanceBooking`
+-- Dumping data for table `dancebooking`
 --
 
-LOCK TABLES `DanceBooking` WRITE;
-/*!40000 ALTER TABLE `DanceBooking` DISABLE KEYS */;
-/*!40000 ALTER TABLE `DanceBooking` ENABLE KEYS */;
+LOCK TABLES `dancebooking` WRITE;
+/*!40000 ALTER TABLE `dancebooking` DISABLE KEYS */;
+/*!40000 ALTER TABLE `dancebooking` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `DanceClass`
+-- Table structure for table `danceclass`
 --
 
-DROP TABLE IF EXISTS `DanceClass`;
+DROP TABLE IF EXISTS `danceclass`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `DanceClass` (
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `danceclass` (
   `dance_class_id` int NOT NULL AUTO_INCREMENT,
   `instructor_id` int DEFAULT NULL,
   `dance_name` text,
@@ -95,56 +95,57 @@ CREATE TABLE `DanceClass` (
   PRIMARY KEY (`dance_class_id`),
   KEY `instructor_id` (`instructor_id`),
   KEY `payment_details_id` (`payment_details_id`),
-  CONSTRAINT `DanceClass_ibfk_1` FOREIGN KEY (`instructor_id`) REFERENCES `Instructor` (`instructor_id`),
-  CONSTRAINT `DanceClass_ibfk_2` FOREIGN KEY (`payment_details_id`) REFERENCES `PaymentDetails` (`payment_details_id`)
+  CONSTRAINT `DanceClass_ibfk_1` FOREIGN KEY (`instructor_id`) REFERENCES `instructor` (`instructor_id`),
+  CONSTRAINT `DanceClass_ibfk_2` FOREIGN KEY (`payment_details_id`) REFERENCES `paymentdetails` (`payment_details_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `DanceClass`
+-- Dumping data for table `danceclass`
 --
 
-LOCK TABLES `DanceClass` WRITE;
-/*!40000 ALTER TABLE `DanceClass` DISABLE KEYS */;
-/*!40000 ALTER TABLE `DanceClass` ENABLE KEYS */;
+LOCK TABLES `danceclass` WRITE;
+/*!40000 ALTER TABLE `danceclass` DISABLE KEYS */;
+/*!40000 ALTER TABLE `danceclass` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `Instructor`
+-- Table structure for table `instructor`
 --
 
-DROP TABLE IF EXISTS `Instructor`;
+DROP TABLE IF EXISTS `instructor`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `Instructor` (
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `instructor` (
   `instructor_id` int NOT NULL AUTO_INCREMENT,
-  `user_id` int DEFAULT NULL,
+  `user_id` varchar(50) DEFAULT NULL,
   `rating` int DEFAULT NULL,
   `description` text,
   `dance_specialty` text,
   PRIMARY KEY (`instructor_id`),
   KEY `user_id` (`user_id`),
-  CONSTRAINT `Instructor_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `User` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  CONSTRAINT `Instructor_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `Instructor`
+-- Dumping data for table `instructor`
 --
 
-LOCK TABLES `Instructor` WRITE;
-/*!40000 ALTER TABLE `Instructor` DISABLE KEYS */;
-/*!40000 ALTER TABLE `Instructor` ENABLE KEYS */;
+LOCK TABLES `instructor` WRITE;
+/*!40000 ALTER TABLE `instructor` DISABLE KEYS */;
+INSERT INTO `instructor` VALUES (23,'z6Z88m3EHZZs3BPAI9L4q98lRWD3',5,'tiktok','hiphip');
+/*!40000 ALTER TABLE `instructor` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `Like`
+-- Table structure for table `like`
 --
 
-DROP TABLE IF EXISTS `Like`;
+DROP TABLE IF EXISTS `like`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `Like` (
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `like` (
   `like_id` int NOT NULL AUTO_INCREMENT,
   `dance_class_id` int DEFAULT NULL,
   `student_id` int DEFAULT NULL,
@@ -152,28 +153,28 @@ CREATE TABLE `Like` (
   PRIMARY KEY (`like_id`),
   KEY `dance_class_id` (`dance_class_id`),
   KEY `student_id` (`student_id`),
-  CONSTRAINT `Like_ibfk_1` FOREIGN KEY (`dance_class_id`) REFERENCES `DanceClass` (`dance_class_id`),
-  CONSTRAINT `Like_ibfk_2` FOREIGN KEY (`student_id`) REFERENCES `Student` (`student_id`)
+  CONSTRAINT `Like_ibfk_1` FOREIGN KEY (`dance_class_id`) REFERENCES `danceclass` (`dance_class_id`),
+  CONSTRAINT `Like_ibfk_2` FOREIGN KEY (`student_id`) REFERENCES `student` (`student_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `Like`
+-- Dumping data for table `like`
 --
 
-LOCK TABLES `Like` WRITE;
-/*!40000 ALTER TABLE `Like` DISABLE KEYS */;
-/*!40000 ALTER TABLE `Like` ENABLE KEYS */;
+LOCK TABLES `like` WRITE;
+/*!40000 ALTER TABLE `like` DISABLE KEYS */;
+/*!40000 ALTER TABLE `like` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `LiveDanceClass`
+-- Table structure for table `livedanceclass`
 --
 
-DROP TABLE IF EXISTS `LiveDanceClass`;
+DROP TABLE IF EXISTS `livedanceclass`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `LiveDanceClass` (
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `livedanceclass` (
   `live_danceclass_id` int NOT NULL AUTO_INCREMENT,
   `dance_class_id` int DEFAULT NULL,
   `date` text,
@@ -181,27 +182,27 @@ CREATE TABLE `LiveDanceClass` (
   `student_limit` int DEFAULT NULL,
   PRIMARY KEY (`live_danceclass_id`),
   KEY `dance_class_id` (`dance_class_id`),
-  CONSTRAINT `LiveDanceClass_ibfk_1` FOREIGN KEY (`dance_class_id`) REFERENCES `DanceClass` (`dance_class_id`)
+  CONSTRAINT `LiveDanceClass_ibfk_1` FOREIGN KEY (`dance_class_id`) REFERENCES `danceclass` (`dance_class_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `LiveDanceClass`
+-- Dumping data for table `livedanceclass`
 --
 
-LOCK TABLES `LiveDanceClass` WRITE;
-/*!40000 ALTER TABLE `LiveDanceClass` DISABLE KEYS */;
-/*!40000 ALTER TABLE `LiveDanceClass` ENABLE KEYS */;
+LOCK TABLES `livedanceclass` WRITE;
+/*!40000 ALTER TABLE `livedanceclass` DISABLE KEYS */;
+/*!40000 ALTER TABLE `livedanceclass` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `Payment`
+-- Table structure for table `payment`
 --
 
-DROP TABLE IF EXISTS `Payment`;
+DROP TABLE IF EXISTS `payment`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `Payment` (
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `payment` (
   `payment_id` int NOT NULL AUTO_INCREMENT,
   `amount` int DEFAULT NULL,
   `date` text,
@@ -212,22 +213,22 @@ CREATE TABLE `Payment` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `Payment`
+-- Dumping data for table `payment`
 --
 
-LOCK TABLES `Payment` WRITE;
-/*!40000 ALTER TABLE `Payment` DISABLE KEYS */;
-/*!40000 ALTER TABLE `Payment` ENABLE KEYS */;
+LOCK TABLES `payment` WRITE;
+/*!40000 ALTER TABLE `payment` DISABLE KEYS */;
+/*!40000 ALTER TABLE `payment` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `PaymentDetails`
+-- Table structure for table `paymentdetails`
 --
 
-DROP TABLE IF EXISTS `PaymentDetails`;
+DROP TABLE IF EXISTS `paymentdetails`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `PaymentDetails` (
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `paymentdetails` (
   `payment_details_id` int NOT NULL AUTO_INCREMENT,
   `mode_of_payment` text,
   `account_name` text,
@@ -237,22 +238,22 @@ CREATE TABLE `PaymentDetails` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `PaymentDetails`
+-- Dumping data for table `paymentdetails`
 --
 
-LOCK TABLES `PaymentDetails` WRITE;
-/*!40000 ALTER TABLE `PaymentDetails` DISABLE KEYS */;
-/*!40000 ALTER TABLE `PaymentDetails` ENABLE KEYS */;
+LOCK TABLES `paymentdetails` WRITE;
+/*!40000 ALTER TABLE `paymentdetails` DISABLE KEYS */;
+/*!40000 ALTER TABLE `paymentdetails` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `Rating`
+-- Table structure for table `rating`
 --
 
-DROP TABLE IF EXISTS `Rating`;
+DROP TABLE IF EXISTS `rating`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `Rating` (
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `rating` (
   `rating_id` int NOT NULL AUTO_INCREMENT,
   `rating` int DEFAULT NULL,
   `instructor_id` int DEFAULT NULL,
@@ -260,83 +261,83 @@ CREATE TABLE `Rating` (
   PRIMARY KEY (`rating_id`),
   KEY `instructor_id` (`instructor_id`),
   KEY `student_id` (`student_id`),
-  CONSTRAINT `Rating_ibfk_1` FOREIGN KEY (`instructor_id`) REFERENCES `Instructor` (`instructor_id`),
-  CONSTRAINT `Rating_ibfk_2` FOREIGN KEY (`student_id`) REFERENCES `Student` (`student_id`)
+  CONSTRAINT `Rating_ibfk_1` FOREIGN KEY (`instructor_id`) REFERENCES `instructor` (`instructor_id`),
+  CONSTRAINT `Rating_ibfk_2` FOREIGN KEY (`student_id`) REFERENCES `student` (`student_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `Rating`
+-- Dumping data for table `rating`
 --
 
-LOCK TABLES `Rating` WRITE;
-/*!40000 ALTER TABLE `Rating` DISABLE KEYS */;
-/*!40000 ALTER TABLE `Rating` ENABLE KEYS */;
+LOCK TABLES `rating` WRITE;
+/*!40000 ALTER TABLE `rating` DISABLE KEYS */;
+/*!40000 ALTER TABLE `rating` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `RecordedDanceClass`
+-- Table structure for table `recordeddanceclass`
 --
 
-DROP TABLE IF EXISTS `RecordedDanceClass`;
+DROP TABLE IF EXISTS `recordeddanceclass`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `RecordedDanceClass` (
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `recordeddanceclass` (
   `recorded_danceclass_id` int NOT NULL AUTO_INCREMENT,
   `dance_class_id` int DEFAULT NULL,
   `youtube_link` text,
   PRIMARY KEY (`recorded_danceclass_id`),
   KEY `dance_class_id` (`dance_class_id`),
-  CONSTRAINT `RecordedDanceClass_ibfk_1` FOREIGN KEY (`dance_class_id`) REFERENCES `DanceClass` (`dance_class_id`)
+  CONSTRAINT `RecordedDanceClass_ibfk_1` FOREIGN KEY (`dance_class_id`) REFERENCES `danceclass` (`dance_class_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `RecordedDanceClass`
+-- Dumping data for table `recordeddanceclass`
 --
 
-LOCK TABLES `RecordedDanceClass` WRITE;
-/*!40000 ALTER TABLE `RecordedDanceClass` DISABLE KEYS */;
-/*!40000 ALTER TABLE `RecordedDanceClass` ENABLE KEYS */;
+LOCK TABLES `recordeddanceclass` WRITE;
+/*!40000 ALTER TABLE `recordeddanceclass` DISABLE KEYS */;
+/*!40000 ALTER TABLE `recordeddanceclass` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `Student`
+-- Table structure for table `student`
 --
 
-DROP TABLE IF EXISTS `Student`;
+DROP TABLE IF EXISTS `student`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `Student` (
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `student` (
   `student_id` int NOT NULL AUTO_INCREMENT,
-  `user_id` int DEFAULT NULL,
+  `user_id` varchar(50) DEFAULT NULL,
   `level` text,
   `isInstructor` tinyint DEFAULT NULL,
   PRIMARY KEY (`student_id`),
   KEY `user_id` (`user_id`),
-  CONSTRAINT `Student_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `User` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  CONSTRAINT `Student_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `Student`
+-- Dumping data for table `student`
 --
 
-LOCK TABLES `Student` WRITE;
-/*!40000 ALTER TABLE `Student` DISABLE KEYS */;
-INSERT INTO `Student` VALUES (13,22,'Expert',0);
-/*!40000 ALTER TABLE `Student` ENABLE KEYS */;
+LOCK TABLES `student` WRITE;
+/*!40000 ALTER TABLE `student` DISABLE KEYS */;
+INSERT INTO `student` VALUES (18,'z6Z88m3EHZZs3BPAI9L4q98lRWD3','Intermediate',1);
+/*!40000 ALTER TABLE `student` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `User`
+-- Table structure for table `user`
 --
 
-DROP TABLE IF EXISTS `User`;
+DROP TABLE IF EXISTS `user`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `User` (
-  `user_id` int NOT NULL,
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `user` (
+  `user_id` varchar(50) NOT NULL,
   `first_name` text NOT NULL,
   `last_name` text,
   `gender` text,
@@ -349,13 +350,13 @@ CREATE TABLE `User` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `User`
+-- Dumping data for table `user`
 --
 
-LOCK TABLES `User` WRITE;
-/*!40000 ALTER TABLE `User` DISABLE KEYS */;
-INSERT INTO `User` VALUES (22,'Brian','Lisondra','M','09154516111','test@gmail.com','06/14/2001',NULL);
-/*!40000 ALTER TABLE `User` ENABLE KEYS */;
+LOCK TABLES `user` WRITE;
+/*!40000 ALTER TABLE `user` DISABLE KEYS */;
+INSERT INTO `user` VALUES ('z6Z88m3EHZZs3BPAI9L4q98lRWD3','brian','luisodra','C','C','lisondrabrian@gmail.com','2001-06-14 00:00:00.000Z','');
+/*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -367,4 +368,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-04-10 15:56:44
+-- Dump completed on 2023-04-13 12:00:52

@@ -5,6 +5,7 @@ const app = express()
 
 app.post('/add', (req,res) => {
     userModel.addUser(req.body)
+    console.log(req.body.id)
     const student_id = studentModel.addStudent(req.body)
     res.send({"studentIdCreated": student_id})
 })
