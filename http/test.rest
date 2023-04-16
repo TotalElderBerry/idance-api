@@ -2,24 +2,23 @@ POST http://localhost:8000/api/student/add HTTP/1.1
 content-type: application/json
 
 {
-    "id": 22,
-    "firstName": "Brian",
-    "lastName": "Lisondra",
-    "gender": "M",
-    "contactNumber" : "09154516111",
-    "emailAddress": "test@gmail.com",
-    "dateOfBirth": "06/14/2001",
-    "level": "Expert"
+    "id": "xx22iasddd",
+    "firstName": "Briaasn",
+    "lastName": "Lisondasra",
+    "gender": "Mas",
+    "contactNumber" : "09154516as111",
+    "emailAddress": "test@gmailas.com",
+    "dateOfBirth": "06/14/2as001",
+    "level": "Exaspert"
 }
 
 
 ###
-
 POST http://localhost:8000/api/instructor/add HTTP/1.1
 content-type: application/json
 
 {
-    "user_id": "z6Z88m3EHZZs3BPAI9L4q98lRWD3",
+    "user_id": "xx22iasd",
     "rating": "5",
     "description": "tiktok",
     "dance_specialty": "hiphip"
@@ -32,9 +31,36 @@ content-type: application/json
 ###
 GET http://localhost:8000/api/instructor/profile/me HTTP/1.1
 content-type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiejZaODhtM0VIWlpzM0JQQUk5TDRxOThsUldEMyIsImlhdCI6MTY4MTM1NzQ5MiwiZXhwIjoxNjgxNDQzODkyfQ.QJzdw_gq3TGK-uyDhDzqYnTpSFu1tv2ZRlmmChUbGHY
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoieHgyMmlhc2QiLCJpYXQiOjE2ODE1NTYyMTAsImV4cCI6MTY4MTU3NDIxMH0.wpq2a_w4L-eFwwg3UmvvZfztVLP_QzX8OutyGCTgJo0
+
 
 
 ###
 GET http://localhost:8000/api/student/me/z6Z88m3EHZZs3BPAI9L4q98lRWD3 HTTP/1.1
+content-type: application/json
+
+###
+POST http://localhost:8000/api/dance-class/add/live HTTP/1.1
+content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoieHgyMmlhc2QiLCJpYXQiOjE2ODE1NTYyMTAsImV4cCI6MTY4MTU3NDIxMH0.wpq2a_w4L-eFwwg3UmvvZfztVLP_QzX8OutyGCTgJo0
+
+{
+    "instructor_id": 41,
+    "dance_name": "Big boy",
+    "dance_genre": "tiktok",
+    "dance_song": "Big Boy",
+    "dance_difficulty": "Easy",
+    "price": 100,
+    "description": "i need a big boy",
+    "date": "10/10/2023",
+    "location": "talamban",
+    "student_limit": 50,
+    "mode_of_payment": "gcash",
+    "account_name": "brian",
+    "account_number": "12121"
+}
+
+
+###
+GET http://localhost:8000/api/dance-class/live/7 HTTP/1.1
 content-type: application/json

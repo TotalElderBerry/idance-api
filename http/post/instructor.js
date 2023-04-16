@@ -12,20 +12,26 @@ app.post('/add', (req,res) => {
 
     instructorModel.getUserInstructorbyId(user_id, (err,result) => {
         if(err){
+            console.log(err.type);
+            console.log(user_id);
             if(err.type == 'No instructor found'){
                 try{
                     instructorModel.addInstructor(req.body)
                     const token = jwt.sign(
-                        user_id,
+                        {user_id: user_id},
                         SECRET_KEY,
                         {
-                            expiresIn: "5h"
+                            expiresIn: '5h',
                         }
                     )
+                    console.log(token);
                     req.body = {token: token}
-                        return
+                    res.status(200).send(token)
+                    return
                     }catch(e){
-                        return res.status(400).send(e)
+                        console.log(e)
+                        res.status(400).send({msg: "some error"})
+                        return
                     }
             }
         }else{
