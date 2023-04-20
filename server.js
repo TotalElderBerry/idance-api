@@ -31,6 +31,7 @@ app.use('/api/instructor', instructorGet,instructorPost,instructorDelete,instruc
 app.use('/api/dance-class',danceClassGet, danceClassPost)
 app.use('/api/attendance', attendanceGet,attendancePost)
 
+
 app.listen(8000, ()=>{
-    console.log('Listening sa port 3000');
+    console.log('Listening sa port 8000');
 })

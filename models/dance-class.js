@@ -5,6 +5,7 @@ const danceClass = {}
 
 danceClass.addLiveDanceClass = (instructorId, newDanceClass) => {
     const {dance_name, dance_genre, dance_song, dance_difficulty, date,location,price,description,student_limit, mode_of_payment,account_name,account_number} = newDanceClass;
+    //deconstructor
 
     const addPaymentDetailsQuery = 'INSERT INTO PaymentDetails (mode_of_payment, account_name, account_number) values (?, ?, ?)';
     var paymentId = -1;

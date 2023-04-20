@@ -26,7 +26,6 @@ studentModel.getUserStudentbyId = (id, cbResult) => {
             return
         }
         cbResult({type: 'no data'},null)
-        return
     })
 }
 

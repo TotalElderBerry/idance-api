@@ -19,7 +19,7 @@ POST http://localhost:8000/api/instructor/add HTTP/1.1
 content-type: application/json
 
 {
-    "user_id": "z6Z88m3EHZZs3BPAI9L4q98lRWD3",
+    "user_id": "Rr0od9rf1nPn44AIwKUO0zAitWq2",
     "rating": "5",
     "description": "tiktok",
     "dance_specialty": "hiphip"
@@ -36,5 +36,27 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiejZaO
 
 
 ###
-GET http://localhost:8000/api/student/me/z6Z88m3EHZZs3BPAI9L4q98lRWD3 HTTP/1.1
+GET http://localhost:8000/api/student/me/Rr0od9rf1nPn44AIwKUO0zAitWq2 HTTP/1.1
 content-type: application/json
+
+###
+POST http://localhost:8000/api/dance-class/add/live HTTP/1.1
+content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiejZaODhtM0VIWlpzM0JQQUk5TDRxOThsUldEMyIsImlhdCI6MTY4MTM1NzQ5MiwiZXhwIjoxNjgxNDQzODkyfQ.QJzdw_gq3TGK-uyDhDzqYnTpSFu1tv2ZRlmmChUbGHY
+
+{
+    "instructor_id": 24,
+    "dance_name": "Cupid Tiktok",
+    "dance_song": "Cupid",
+    "dance_difficulty": "Hard",
+    "date": "06/14/2001",
+    "location": "Talamban",
+    "price": "400",
+    "description": "Forda Tiktok",
+    "student_limit": 20,
+    "mode_of_payment": "Paypal",
+    "account_name": "Brian",
+    "account_number": "12345"
+}
+
+# const {dance_name, dance_genre, dance_song, dance_difficulty, date,location,price,description,student_limit, mode_of_payment,account_name,account_number} = newDanceClass;

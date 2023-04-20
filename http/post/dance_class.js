@@ -7,6 +7,7 @@ app.post('/add/live',  verifyInstructor, (req,res) => {
     console.log('dance class add');
     const newDanceClass = req.body
     const {instructor_id} = newDanceClass
+    // const instructor_id = newDanceClass.instructor_id
     console.log(req.user.user_id);
     danceClass.addLiveDanceClass(instructor_id, newDanceClass)
 })

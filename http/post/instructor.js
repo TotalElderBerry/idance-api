@@ -9,7 +9,7 @@ const { SECRET_KEY } = require('../../env')
 
 app.post('/add', (req,res) => {
     const {user_id} = req.body  
-
+    console.log(user_id)
     instructorModel.getUserInstructorbyId(user_id, (err,result) => {
         if(err){
             if(err.type == 'No instructor found'){
@@ -19,16 +19,17 @@ app.post('/add', (req,res) => {
                         user_id,
                         SECRET_KEY,
                         {
-                            expiresIn: "5h"
+                            expiresIn: "5h",
                         }
                     )
                     req.body = {token: token}
-                        return
+                    return
                     }catch(e){
                         return res.status(400).send(e)
                     }
             }
         }else{
+            console.log(result);
             return res.status(400).send({msg: 'account already exist'})
         }
     })

@@ -20,14 +20,16 @@ instructorModel.addInstructor = (newInstructor) => {
 
 
 instructorModel.getUserInstructorbyId = (id, cbResult) => {
+    console.log(id);
     const query = `SELECT * from User INNER JOIN Instructor on Instructor.user_id = '${id}'`
-
+    console.log(query);
     db_conn.query(query,(err,res, fields) => {
+        console.log(err);
         if(err) {
             cbResult(err,null)
             return
         }
-        if(res) {
+        if(res.len > 0) {
             cbResult(null,res)
             return
         }
