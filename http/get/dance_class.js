@@ -3,7 +3,7 @@ const danceClass = require('../../models/dance-class')
 const studentModel = require('../../models/student')
 const app = express()
 
-app.get('/all', (req,res) => {
+app.get('/live/all', (req,res) => {
     danceClass.getAllUpcomingDanceClass((myErr,data) => {
         if(myErr){
             return res.status(400).send(err)
@@ -12,7 +12,7 @@ app.get('/all', (req,res) => {
     })
 })
 
-app.get('/:id', (req,res) => {
+app.get('/live/:id', (req,res) => {
     const dance_class_id = req.params.id
     const {student_id} = req.body
 

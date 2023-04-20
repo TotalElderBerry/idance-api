@@ -7,7 +7,7 @@ danceClass.addLiveDanceClass = (instructorId, newDanceClass) => {
     const {dance_name, dance_genre, dance_song, dance_difficulty, date,location,price,description,student_limit, mode_of_payment,account_name,account_number} = newDanceClass;
     //deconstructor
 
-    const addPaymentDetailsQuery = 'INSERT INTO PaymentDetails (mode_of_payment, account_name, account_number) values (?, ?, ?)';
+    const addPaymentDetailsQuery = 'INSERT INTO paymentdetails (mode_of_payment, account_name, account_number) values (?, ?, ?)';
     var paymentId = -1;
     db_conn.query(addPaymentDetailsQuery,[mode_of_payment,account_name,account_number], (err,res) => {
         if(err) throw err
@@ -15,12 +15,12 @@ danceClass.addLiveDanceClass = (instructorId, newDanceClass) => {
         if(paymentId > 0){
             // const addDanceClassQuery = `INSERT INTO DanceClass (instructor_id,dance_name, dance_genre, dance_song, dance_difficulty, date,location,price,description,student_limit,image,payment_details_id) values (?,?,?,?,?,?,?,?,?,?,?,?)`;
     
-            const addLiveDanceClassQuery = 'INSERT INTO DanceClass (instructor_id, dance_name, dance_genre, dance_song, dance_difficulty, price, description, payment_details_id) VALUES (?,?,?,?,?,?,?,?)'
+            const addLiveDanceClassQuery = 'INSERT INTO danceclass (instructor_id, dance_name, dance_genre, dance_song, dance_difficulty, price, description, payment_details_id) VALUES (?,?,?,?,?,?,?,?)'
 
             db_conn.query(addLiveDanceClassQuery,[instructorId, dance_name, dance_genre, dance_song, dance_difficulty,price,description,paymentId], (err,res) => {
                 if(err) throw err
                 if(res.insertId){
-                    const insertLiveDanceClassTableQuery = 'INSERT INTO LiveDanceClass (dance_class_id, date,location, student_limit) values (?,?,?,?)'
+                    const insertLiveDanceClassTableQuery = 'INSERT INTO livedanceclass (dance_class_id, date,location, student_limit) values (?,?,?,?)'
 
                     db_conn.query(insertLiveDanceClassTableQuery, [res.insertId,date,location,student_limit], (err,res)=>{
 
@@ -36,19 +36,19 @@ danceClass.addLiveDanceClass = (instructorId, newDanceClass) => {
 danceClass.addRecordedDanceClass = (instructorId, newDanceClass) => {
     const {dance_name, dance_genre, dance_song, dance_difficulty, youtube_link,description, mode_of_payment,account_name,account_number, price} = newDanceClass;
 
-    const addPaymentDetailsQuery = 'INSERT INTO PaymentDetails (mode_of_payment, account_name, account_number) values (?, ?, ?)';
+    const addPaymentDetailsQuery = 'INSERT INTO paymentdetails (mode_of_payment, account_name, account_number) values (?, ?, ?)';
     var paymentId = -1;
     db_conn.query(addPaymentDetailsQuery,[mode_of_payment,account_name,account_number], (err,res) => {
         if(err) throw err
         paymentId = res.insertId;
         if(paymentId > 0){
             
-            const addRecordedDanceClassQuery = 'INSERT INTO DanceClass (instructor_id, dance_name, dance_genre, dance_song, dance_difficulty, price, description, payment_details_id) VALUES (?,?,?,?,?,?,?,?)'
+            const addRecordedDanceClassQuery = 'INSERT INTO danceclass (instructor_id, dance_name, dance_genre, dance_song, dance_difficulty, price, description, payment_details_id) VALUES (?,?,?,?,?,?,?,?)'
 
             db_conn.query(addRecordedDanceClassQuery,[instructorId, dance_name, dance_genre, dance_song, dance_difficulty,price,description,paymentId], (err,res) => {
                 if(err) throw err
                 if(res.insertId){
-                    const insertLiveDanceClassTableQuery = 'INSERT INTO RecordedDanceClass (dance_class_id, youtube_link) values (?,?)'
+                    const insertLiveDanceClassTableQuery = 'INSERT INTO recordeddanceclass (dance_class_id, youtube_link) values (?,?)'
 
                     db_conn.query(insertLiveDanceClassTableQuery, [res.insertId,youtube_link], (err,res)=>{
 
@@ -62,7 +62,7 @@ danceClass.addRecordedDanceClass = (instructorId, newDanceClass) => {
 }
 
 danceClass.getAllUpcomingDanceClass = (callback) => {
-    const query = 'select * from (DanceClass inner join LiveDanceClass on DanceClass.dance_class_id = LiveDanceClass.dance_class_id inner join Instructor on Instructor.instructor_id = DanceClass.instructor_id) inner join User on User.user_id = Instructor.user_id inner join PaymentDetails on DanceClass.payment_details_id = PaymentDetails.payment_details_id'
+    const query = 'select * from (danceclass inner join livedanceclass on danceclass.dance_class_id = livedanceclass.dance_class_id inner join instructor on instructor.instructor_id = danceclass.instructor_id) inner join user on user.user_id = instructor.user_id inner join paymentdetails on danceclass.payment_details_id = paymentdetails.payment_details_id'
 
     db_conn.query(query, (err,res,fields)=>{
         if(err) {
@@ -75,7 +75,7 @@ danceClass.getAllUpcomingDanceClass = (callback) => {
             ],
             happening_today: [
             ],
-            classes_done: []
+            classes_done: [],
         }
 
         for(const index in res){
@@ -83,7 +83,7 @@ danceClass.getAllUpcomingDanceClass = (callback) => {
             const formattedToday = formatDate(today)
             console.log(`Number of days between: ${formattedToday} and ${res[index].date}`);
             console.log(differenceOfDaysBetweenDates(formattedToday,res[index].date));
-            const daysBetween = differenceOfDaysBetweenDates(formattedToday,res[index].date);
+            let daysBetween = differenceOfDaysBetweenDates(formattedToday,res[index].date);
             
             const singleClassJson = {
                 dance_id: `${res[index].dance_class_id}`,
@@ -115,16 +115,17 @@ danceClass.getAllUpcomingDanceClass = (callback) => {
             }
             singleClassJson['instructor'] = instructorInfoJson
             singleClassJson['payment'] = paymentDetailsJson
-
+            daysBetween = (daysBetween>0)?1:daysBetween
             switch (daysBetween) {
                 case 0:
                     danceClassJson.happening_today.push(singleClassJson)
                     break;
                 case 1:
-                    danceClass.upcoming_classes.push(singleClassJson)
+                    danceClassJson.upcoming_classes.push(singleClassJson)
                     break;
                 default:
-                    danceClass.classes_done.push(singleClassJson)
+                    console.log(singleClassJson);
+                    danceClassJson.classes_done.push(singleClassJson)
                     break;
             }
 
@@ -134,7 +135,7 @@ danceClass.getAllUpcomingDanceClass = (callback) => {
 }
 
 danceClass.getAllRecordedDanceClassOffering = (callback) => {
-    const query = 'select * from (DanceClass inner join RecordedDanceClass on DanceClass.dance_class_id = RecordedDanceClass.dance_class_id inner join Instructor on Instructor.instructor_id = DanceClass.instructor_id) inner join User on User.user_id = Instructor.user_id inner join PaymentDetails on DanceClass.payment_details_id = PaymentDetails.payment_details_id'
+    const query = 'select * from (danceclass inner join recordeddanceclass on danceclass.dance_class_id = recordeddanceclass.dance_class_id inner join instructor on instructor.instructor_id = danceclass.instructor_id) inner join user on user.user_id = instructor.user_id inner join paymentdetails on danceclass.payment_details_id = paymentdetails.payment_details_id'
 
     db_conn.query(query, (err,res,fields)=>{
         if(err) {

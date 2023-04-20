@@ -3,16 +3,17 @@ const db_conn = require("../db/db");
 const instructorModel = {}
 
 instructorModel.addInstructor = (newInstructor) => {
-    const {user_id,rating,description,dance_specialty} = newInstructor
-    const query = 'INSERT INTO Instructor (user_id, rating, description, dance_specialty) VALUES (?, ?, ?, ?)'
+    const {user_id,description,dance_specialty} = newInstructor
+    const query = 'INSERT INTO instructor (user_id, rating, description, dance_specialty) VALUES (?, 0, ?, ?)'
 
-    db_conn.query(query, [user_id,rating,description,dance_specialty], (err,result) => {
+    db_conn.query(query, [user_id,description,dance_specialty], (err,result) => {
         if(err) throw err
         console.log(result);
         console.log('Successfully inserted new instructor data');
-        const updateStudentQuery = `UPDATE Student set isInstructor = 1 where Student.user_id ='${user_id}'`
+        const updateStudentQuery = `UPDATE student set isInstructor = 1 where student.user_id ='${user_id}'`
         db_conn.query(updateStudentQuery, (err, result) => {
             if(err) throw err
+            return
         })
     })
 
@@ -20,26 +21,26 @@ instructorModel.addInstructor = (newInstructor) => {
 
 
 instructorModel.getUserInstructorbyId = (id, cbResult) => {
-    console.log(id);
-    const query = `SELECT * from User INNER JOIN Instructor on Instructor.user_id = '${id}'`
-    console.log(query);
+    const query = `select * from user left join instructor on instructor.user_id = user.user_id and instructor.user_id = '${id}' where instructor.user_id = '${id}'`
+
     db_conn.query(query,(err,res, fields) => {
         console.log(err);
         if(err) {
             cbResult(err,null)
             return
         }
-        if(res.len > 0) {
+        else if(res.length > 0) {
             cbResult(null,res)
             return
+        }else{
+            cbResult({type: 'No instructor found'}, null)
         }
-        cbResult({type: 'No instructor found'}, null)
     })
     return
 }
 
 instructorModel.getDanceClassesOfInstructor = (id, callback) => {
-    const query = `SELECT * from DanceClass where DanceClass.instructor_id = ${id}`
+    const query = `SELECT * from danceclass where danceclass.instructor_id = ${id}`
 
     db_conn.query(query,(err,res,fields) => {
         if(err){
@@ -54,5 +55,6 @@ instructorModel.getDanceClassesOfInstructor = (id, callback) => {
 
     })
 }
+
 
 module.exports = instructorModel
