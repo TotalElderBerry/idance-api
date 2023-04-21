@@ -22,6 +22,7 @@ studentModel.getUserStudentbyId = (id, cbResult) => {
             return
         }
         if(res){
+            console.log(res);
             cbResult(null,res)
             return
         }
@@ -39,7 +40,7 @@ studentModel.joinDanceClass = (dance_class_id, student_id) => {
 }
 
 studentModel.getStudentDanceClassbyId = (student_id) => {
-    const query =  `select * from danceclass inner join dancebooking on danceclass.dance_class_id = dancebooking.dance_class_id inner join Student on ${student_id} = dancebooking.student_id`
+    const query =  `select * from danceclass inner join dancebooking on danceclass.dance_class_id = dancebooking.dance_class_id inner join student on ${student_id} = dancebooking.student_id`
 
     db_conn.query(query,(err,res, fields) => {
         if(err) throw err

@@ -25,6 +25,7 @@ danceClass.addLiveDanceClass = (instructorId, newDanceClass) => {
                     db_conn.query(insertLiveDanceClassTableQuery, [res.insertId,date,location,student_limit], (err,res)=>{
 
                     })
+                    return res.insertId
                 }
                 console.log("Successfully added a live dance class")
             })
@@ -87,6 +88,7 @@ danceClass.getAllUpcomingDanceClass = (callback) => {
             
             const singleClassJson = {
                 dance_id: `${res[index].dance_class_id}`,
+                live_danceclass_id: `${res[index].live_danceclass_id}`,
                 dance_name: `${res[index].dance_name}`,
                 dance_genre: `${res[index].dance_genre}`,
                 dance_song: `${res[index].dance_song}`,
@@ -104,6 +106,15 @@ danceClass.getAllUpcomingDanceClass = (callback) => {
                 first_name: `${res[index].first_name}`,
                 last_name: `${res[index].last_name}`,
                 dance_specialty: `${res[index].dance_specialty}`,
+                user_id: `${res[index].user_id}`,
+                gender: `${res[index].gender}`,
+                contact_number: `${res[index].contact_number}`,
+                email_address: `${res[index].email_address}`,
+                data_of_birth: `${res[index].data_of_birth}`,
+                rating: `${res[index].rating}`,
+                description: `${res[index].description}`,
+                profile_picture: `${res[index].profile_picture}`
+
             }    
             
 

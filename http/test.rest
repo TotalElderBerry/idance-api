@@ -59,4 +59,9 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiejZaO
     "account_number": "12345"
 }
 
+###
+GET http://localhost:8000/api/dance-class/live/all HTTP/1.1
+content-type: application/json
+
+
 # const {dance_name, dance_genre, dance_song, dance_difficulty, date,location,price,description,student_limit, mode_of_payment,account_name,account_number} = newDanceClass;

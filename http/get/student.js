@@ -32,7 +32,12 @@ app.get('/me/:id', (req,res)=>{
             res.status(400).send(myErr)
             return
         }
-        if(data[0].isInstructor === 1){
+        if(data.length == 0){ 
+            return
+        }
+
+
+        if(data && data[0].isInstructor === 1){
             const token = jwt.sign(
                 {user_id: data[0].user_id},
                 SECRET_KEY,
