@@ -42,6 +42,9 @@ app.get('/profile/me', verifyInstructor ,(req,res) => {
     console.log(`api id ${id}`);
     instructorModel.getUserInstructorbyId(id,(myErr, data) => {
         if(data !== null){
+            data[0].instructor_id = `${data[0].instructor_id}`
+            data[0].rating = `${data[0].rating}`
+            console.log(data.rating);
             return res.status(200).send(data)
         }   
         return res.status(404).send(myErr)

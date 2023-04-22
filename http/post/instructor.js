@@ -26,7 +26,7 @@ app.post('/add', (req,res) => {
                     )
                     console.log(token);
                     req.body = {token: token}
-                    res.status(200).send(token)
+                    res.status(200).send({"token": token})
                     return
                     }catch(e){
                         console.log(e)

@@ -31,7 +31,7 @@ content-type: application/json
 ###
 GET http://localhost:8000/api/instructor/profile/me HTTP/1.1
 content-type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoieHgyMmlhc2QiLCJpYXQiOjE2ODE1NTYyMTAsImV4cCI6MTY4MTU3NDIxMH0.wpq2a_w4L-eFwwg3UmvvZfztVLP_QzX8OutyGCTgJo0
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZ2JxcHlncXo3MlFWQWlkbTkwbHhxOW96OWk5MiIsImlhdCI6MTY4MjExODU0OCwiZXhwIjoxNjgyMjA0OTQ4fQ.x80K6yqH0Mm4Fq27JYMSBzMxXv7G32XUBN5MmfMbn_U
 
 
 
@@ -61,6 +61,10 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiejZaO
 
 ###
 GET http://localhost:8000/api/dance-class/live/all HTTP/1.1
+content-type: application/json
+
+###
+GET http://localhost:8000/api/instructor/xx22id HTTP/1.1
 content-type: application/json
 
 
