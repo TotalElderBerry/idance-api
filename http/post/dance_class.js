@@ -9,8 +9,10 @@ app.post('/add/live',  verifyInstructor, (req,res) => {
     const {instructor_id} = newDanceClass
     // const instructor_id = newDanceClass.instructor_id
     console.log(req.user.user_id);
-    const insertId = danceClass.addLiveDanceClass(instructor_id, newDanceClass)
-    res.status(200).send({"insertId": insertId})
+    danceClass.addLiveDanceClass(instructor_id, newDanceClass, id => {
+        console.log(id);
+        res.status(200).send({"insertId": id})
+    })
 })
 
 app.post('/add/recorded', verifyInstructor, (req,res) => {

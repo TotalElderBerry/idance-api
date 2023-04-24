@@ -3,7 +3,7 @@ const {differenceOfDaysBetweenDates, formatDate} = require("../utils/dateDiffere
 
 const danceClass = {}
 
-danceClass.addLiveDanceClass = (instructorId, newDanceClass) => {
+danceClass.addLiveDanceClass = (instructorId, newDanceClass, callback) => {
     const {dance_name, dance_genre, dance_song, dance_difficulty, date,location,price,description,student_limit, mode_of_payment,account_name,account_number} = newDanceClass;
     //deconstructor
 
@@ -23,9 +23,9 @@ danceClass.addLiveDanceClass = (instructorId, newDanceClass) => {
                     const insertLiveDanceClassTableQuery = 'INSERT INTO livedanceclass (dance_class_id, date,location, student_limit) values (?,?,?,?)'
 
                     db_conn.query(insertLiveDanceClassTableQuery, [res.insertId,date,location,student_limit], (err,res)=>{
-
+                        
                     })
-                    return res.insertId
+                    callback(res.insertId);
                 }
                 console.log("Successfully added a live dance class")
             })

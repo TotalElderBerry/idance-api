@@ -42,14 +42,14 @@ content-type: application/json
 ###
 POST http://localhost:8000/api/dance-class/add/live HTTP/1.1
 content-type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiejZaODhtM0VIWlpzM0JQQUk5TDRxOThsUldEMyIsImlhdCI6MTY4MTM1NzQ5MiwiZXhwIjoxNjgxNDQzODkyfQ.QJzdw_gq3TGK-uyDhDzqYnTpSFu1tv2ZRlmmChUbGHY
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMHVmMHVMaThSSFBkZHhxQUxKNVVjd20yeXpuMiIsImlhdCI6MTY4MjMyNDk3MiwiZXhwIjoxNjgyNDExMzcyfQ.eCwAPP80-HpfIVRPKvBulrIyhlG7o-u5e6X-FQMKkW4
 
 {
     "instructor_id": 24,
     "dance_name": "Cupid Tiktok",
     "dance_song": "Cupid",
     "dance_difficulty": "Hard",
-    "date": "06/14/2001",
+    "date": "2024-01-01",
     "location": "Talamban",
     "price": "400",
     "description": "Forda Tiktok",
