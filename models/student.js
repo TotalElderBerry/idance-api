@@ -1,5 +1,6 @@
 const db_conn = require("../db/db");
 const { formatDate } = require("../utils/dateDifference");
+const paymentModel = require("./payment");
 
 const studentModel = {}
 
@@ -30,21 +31,51 @@ studentModel.getUserStudentbyId = (id, cbResult) => {
     })
 }
 
-studentModel.joinDanceClass = (dance_class_id, student_id) => {
-    const query = `INSERT INTO dancebooking (student_id, dance_class_id, date_approved) values (?, ?, ?)`
-    const dateNow = formatDate(new Date())
-    db_conn.query(query, [student_id,dance_class_id, dateNow],(err, res)=>{
-        if(err) throw err
-        console.log('successfully inserted a dancebooking data');
-    }) 
+
+studentModel.getStudentbyStudentId = (id, cbResult) => {
+    const query = `select * from student inner join user on user.user_id = student.user_id where student.student_id = ${id}`
+
+    db_conn.query(query, (err,res,fields)=>{
+        if(err) {
+            cbResult(err,null)
+            return
+        }
+        if(res){
+            cbResult(null,res)
+            return
+        }
+    })
 }
 
-studentModel.getStudentDanceClassbyId = (student_id) => {
-    const query =  `select * from danceclass inner join dancebooking on danceclass.dance_class_id = dancebooking.dance_class_id inner join student on ${student_id} = dancebooking.student_id`
+studentModel.joinDanceClass = (dance_class_id, fields) => {
+    const {student_id} = fields
+    const query = `INSERT INTO dancebooking (student_id, dance_class_id, date_approved,payment_id) values (?, ?, ?, ?)`
+    const mesg = "PENDING"
 
-    db_conn.query(query,(err,res, fields) => {
+    paymentModel.addPayment(fields,(insertId) => {
+        db_conn.query(query, [student_id,dance_class_id, mesg, insertId],(err, res)=>{
+            if(err) throw err
+            console.log('successfully inserted a dancebooking data');
+            return "successful"
+        }) 
+    })
+
+}
+
+studentModel.getStudentDanceClassbyId = (student_id, callback) => {
+    const query =  `select * from dancebooking where dancebooking.student_id = ${student_id}`
+
+    db_conn.query(query,(err,result) => {
         if(err) throw err
-        return res
+        const danceRes = []
+        for(const r in result){
+            paymentModel.getPaymentById(result[r].payment_id,(paymentres)=>{
+                result[r].payment = paymentres
+                danceRes.push(result[r])
+                console.log(result[r]);
+                callback(err,result,danceRes)
+            })
+        }
     })
 }
 

@@ -2,6 +2,7 @@ const express = require('express')
 const studentModel = require('../../models/student')
 const jwt = require('jsonwebtoken')
 const { SECRET_KEY } = require('../../env')
+const paymentModel = require('../../models/payment')
 const app = express()
 
 app.get('/', (req,res) => {
@@ -18,6 +19,16 @@ app.get('/:id', (req,res)=>{
         
         res.status(200).send(data)
     })
+})
+
+app.get('/:id/classes', (req,res) => {
+    studentModel.getStudentDanceClassbyId(req.params.id,(error,result,danceRes) => {
+        if(error) throw error
+        if(result.length == danceRes.length){
+            return res.status(200).send(result)
+        }
+    })
+    // res.send("ok")
 })
 
 /**

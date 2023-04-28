@@ -3,6 +3,8 @@ const {differenceOfDaysBetweenDates, formatDate} = require("../utils/dateDiffere
 
 const danceClass = {}
 
+
+
 danceClass.addLiveDanceClass = (instructorId, newDanceClass, callback) => {
     const {dance_name, dance_genre, dance_song, dance_difficulty, date,location,price,description,student_limit, mode_of_payment,account_name,account_number} = newDanceClass;
     //deconstructor
@@ -117,7 +119,6 @@ danceClass.getAllUpcomingDanceClass = (callback) => {
 
             }    
             
-
             const paymentDetailsJson = {
                 payment_details_id: `${res[index].payment_details_id}`,
                 mode_of_payment: `${res[index].mode_of_payment}`,
@@ -214,6 +215,7 @@ danceClass.getAllRecordedDanceClassOffering = (callback) => {
         callback(null,danceClassJson)
     })     
 }
+
 
 
 

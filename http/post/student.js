@@ -12,8 +12,13 @@ app.post('/add', (req,res) => {
 
 app.post('/book/class/:id', (req,res) => {
     const dance_class_id = req.params.id
-    const {student_id} = req.body
-    studentModel.joinDanceClass(dance_class_id,student_id)
+    // const {student_id} = req.body
+    try {
+        studentModel.joinDanceClass(dance_class_id,req.body)
+        res.status(200).send({"message":"success"})
+    } catch (error) {
+        res.status(401).send({"message":"unauthorized"})
+    }
 
 })
 
