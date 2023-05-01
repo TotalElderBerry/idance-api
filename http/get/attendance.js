@@ -8,8 +8,14 @@ app.get('/class/:class_id/student/:student_id', (req,res) => {
     const date = new Date().toLocaleString()
     console.log(date);
     try {
-        attendance.recordAttendance(student_id, class_id)
-        res.send(`we have attend u student ${student_id} in class ${class_id}`)
+        attendance.recordAttendance(parseInt(student_id), class_id, (message)=>{
+            if(message == 'Cannot attend you'){
+
+                return res.status(401).send("Unauthorized")
+            }
+            return res.status(200).send("Success")
+
+        })
     } catch (error) {
         res.send({"message": "cannot attend u"})
     }
