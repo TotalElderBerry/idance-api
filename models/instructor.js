@@ -1,5 +1,5 @@
 const db_conn = require("../db/db");
-
+const {formatDate} = require("../utils/dateDifference")
 const instructorModel = {}
 
 instructorModel.addInstructor = (newInstructor) => {
@@ -39,10 +39,10 @@ instructorModel.getUserInstructorbyId = (id, cbResult) => {
     return
 }
 
-instructorModel.getDanceClassesOfInstructor = (id, callback) => {
-    const query = `SELECT * from danceclass where danceclass.instructor_id = ${id}`
+instructorModel.getLiveDanceClassesOfInstructor = (id, callback) => {
+    const query = `select * from livedanceclass inner join danceclass on livedanceclass.dance_class_id = danceclass.dance_class_id where danceclass.instructor_id = ${id}`
 
-    db_conn.query(query,(err,res,fields) => {
+    db_conn.query(query,(err,res) => {
         if(err){
             callback(err,null)
             return
@@ -52,7 +52,16 @@ instructorModel.getDanceClassesOfInstructor = (id, callback) => {
             return
         }
         callback({type: 'no classes'},null)
+    })
+}
 
+instructorModel.acceptStudentDanceBooking = (student_id, dance_class_id) => {
+    const dateNow = formatDate("");
+    const query = `update dancebooking set ${dateNow} where student_id = ${student_id} and dance_class_id = ${dance_class_id}`
+
+    db_conn.query(query,(err,res) => {
+        if(err) throw err
+        return "success"
     })
 }
 

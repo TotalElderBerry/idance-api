@@ -21,6 +21,22 @@ paymentModel.getPaymentById = (payment_id, callback) => {
     db_conn.query(query, (err,res) => {
         if(err) throw err
         if(res.length > 0){
+            console.log(res);
+            callback(res[0])
+            return
+        }
+        callback(res)
+
+    })
+    return
+}
+
+paymentModel.getPaymentDetailsById = (payment_id, callback) => {
+    const query = `select * from paymentdetails where payment_details_id = ${payment_id}`
+
+    db_conn.query(query, (err,res) => {
+        if(err) throw err
+        if(res.length > 0){
             callback(res[0])
             return
         }

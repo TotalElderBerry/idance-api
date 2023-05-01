@@ -32,5 +32,13 @@ app.get('/live/:id', (req,res) => {
     return res.send({"isBooked": true})
 })
 
+app.get('/live/:id/students', (req,res) => {
+    const dance_class_id = req.params.id
+
+    danceClass.getDanceClassBookingStudents(dance_class_id,(students)=>{
+        res.send(students)
+    })
+})
+
 
 module.exports = app

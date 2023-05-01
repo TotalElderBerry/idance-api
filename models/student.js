@@ -16,7 +16,7 @@ studentModel.addStudent = (newStudent) => {
 }
 
 studentModel.getUserStudentbyId = (id, cbResult) => {
-    const query = `SELECT * from user INNER JOIN student on student.user_id = '${id}'`
+    const query = `SELECT * from user INNER JOIN student on student.user_id = '${id}' where user.user_id = '${id}'`
     db_conn.query(query, (err,res,fields)=>{
         if(err) {
             cbResult(err,null)
@@ -68,6 +68,10 @@ studentModel.getStudentDanceClassbyId = (student_id, callback) => {
     db_conn.query(query,(err,result) => {
         if(err) throw err
         const danceRes = []
+        console.log(result);
+        if(result.length == 0){
+            callback(err,result,[])
+        }
         for(const r in result){
             paymentModel.getPaymentById(result[r].payment_id,(paymentres)=>{
                 result[r].payment = paymentres

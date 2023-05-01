@@ -1,5 +1,6 @@
 const db_conn = require("../db/db");
 const {differenceOfDaysBetweenDates, formatDate} = require("../utils/dateDifference");
+const studentModel = require("./student");
 
 const danceClass = {}
 
@@ -216,6 +217,33 @@ danceClass.getAllRecordedDanceClassOffering = (callback) => {
     })     
 }
 
+danceClass.getDanceClassBookingStudents = (dance_class_id , callback) => {
+    const query = `select * from dancebooking where dance_class_id = ${dance_class_id}`
+
+    db_conn.query(query,(err,res)=>{
+        if(err) throw err
+
+        if(res.length ==0){
+            callback([])
+            return
+        }
+        
+        const returnResult = []
+        res.forEach(element => {
+            console.log(element.student_id);
+            studentModel.getStudentbyStudentId(element.student_id,(err,student)=>{
+                element.student = student[0];
+                // console.log(element);
+                returnResult.push(element)
+                if(returnResult.length == res.length){
+                    console.log(returnResult);
+                    callback(res)
+                    return
+                }
+            })
+        });
+    })
+}
 
 
 

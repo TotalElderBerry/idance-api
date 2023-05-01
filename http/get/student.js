@@ -21,9 +21,15 @@ app.get('/:id', (req,res)=>{
     })
 })
 
+
+
+//fix heree!!!
 app.get('/:id/classes', (req,res) => {
+    console.log("hi");
     studentModel.getStudentDanceClassbyId(req.params.id,(error,result,danceRes) => {
+        console.log(error);
         if(error) throw error
+        
         if(result.length == danceRes.length){
             return res.status(200).send(result)
         }
