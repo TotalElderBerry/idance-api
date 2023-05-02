@@ -57,7 +57,7 @@ instructorModel.getLiveDanceClassesOfInstructor = (id, callback) => {
 
 instructorModel.acceptStudentDanceBooking = (student_id, dance_class_id) => {
     const dateNow = formatDate("");
-    const query = `update dancebooking set ${dateNow} where student_id = ${student_id} and dance_class_id = ${dance_class_id}`
+    const query = `update dancebooking set date_approved = '${dateNow}' where student_id = ${student_id} and dance_class_id = ${dance_class_id}`
 
     db_conn.query(query,(err,res) => {
         if(err) throw err
