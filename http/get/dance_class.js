@@ -41,4 +41,10 @@ app.get('/live/:id/students', (req,res) => {
 })
 
 
+app.get('/:id/attendance', (req,res) => {
+    danceClass.getStudentsAttended(req.params.id,(result) => {
+        res.status(200).send(result)
+    })
+})
+
 module.exports = app

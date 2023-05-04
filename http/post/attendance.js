@@ -24,7 +24,7 @@ app.post('/class/:live_class_id',(req,res) => {
     console.log(student_id);
     try {
         attendance.recordAttendance(parseInt(student_id), class_id, (message)=>{
-            console.log(message);
+            console.log(message + "dsa");
             if(message == 'Cannot attend you'){
                 return res.status(401).send("Unauthorized")
             }
@@ -32,7 +32,7 @@ app.post('/class/:live_class_id',(req,res) => {
 
         })
     } catch (error) {
-        console.log(error);
+        console.log(error +" cardh");
         return res.status(401).send({"message": "cannot attend u"})
     }
 })

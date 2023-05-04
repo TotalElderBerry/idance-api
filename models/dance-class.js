@@ -236,7 +236,6 @@ danceClass.getDanceClassBookingStudents = (dance_class_id , callback) => {
                 // console.log(element);
                 returnResult.push(element)
                 if(returnResult.length == res.length){
-                    console.log(returnResult);
                     callback(res)
                     return
                 }
@@ -246,5 +245,31 @@ danceClass.getDanceClassBookingStudents = (dance_class_id , callback) => {
 }
 
 
+danceClass.getStudentsAttended = (live_dance_class_id, callback) => {
+    const query = `select * from attendance where live_danceclass_id = ${live_dance_class_id}`
 
+    db_conn.query(query,(err,res) => {
+        if(res.length == 0){
+            callback([])
+            return
+        }
+        let temp = []
+        for(let i = 0; i < res.length; i++){
+            let obj = {}
+            studentModel.getStudentbyStudentId(res[i].student_id,(err,student)=>{
+                if(err) throw err
+                obj = res[i]
+                obj.student = student[0]
+                temp.push(obj)
+                // console.log(res[r]);
+                if(temp.length == res.length){
+                    callback(res)
+                }
+                console.log(JSON.stringify((temp)))
+            })
+        }
+        
+    })
+
+}
 module.exports = danceClass
