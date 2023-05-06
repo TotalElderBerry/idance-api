@@ -4,7 +4,7 @@ const verifyInstructor = require('../../middleware/instructor-auth')
 const paymentModel = require('../../models/payment')
 const app = express()
 
-app.get('/', (req,res) => {
+app.get('/all', (req,res) => {
 
 })
 
@@ -30,6 +30,9 @@ app.get('/:id/live', (req,response) => {
             }
             res.status(400).send('somethiung is wrong')
         } 
+        if(res.length == 0){
+            response.send([])
+        }
         classes = []
         for(const index in res){
             

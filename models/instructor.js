@@ -19,6 +19,17 @@ instructorModel.addInstructor = (newInstructor) => {
 
 }
 
+instructorModel.getAllInstructors = (callback) => {
+    const query = `select * from instructor`
+
+    db_conn.query(query,(err,res) => {
+        let instructors = []
+        for(r in res){
+            let singleInstruct = {}
+        }
+    })
+}
+
 
 instructorModel.getUserInstructorbyId = (id, cbResult) => {
     const query = `select * from user left join instructor on instructor.user_id = user.user_id and instructor.user_id = '${id}' where instructor.user_id = '${id}'`

@@ -156,14 +156,7 @@ danceClass.getAllRecordedDanceClassOffering = (callback) => {
             return
         }
         console.log(res);
-        const danceClassJson = {
-            upcoming_classes: [
-            ],
-            happening_today: [
-            ],
-            classes_done: []
-        }
-
+        const temp = []
         for(const index in res){
             const today = new Date()
             const formattedToday = formatDate(today)
@@ -172,6 +165,7 @@ danceClass.getAllRecordedDanceClassOffering = (callback) => {
             const daysBetween = differenceOfDaysBetweenDates(formattedToday,res[index].date);
             
             const singleClassJson = {
+                recorded_class_id: `${res[index].recorded_danceclass_id}`,
                 dance_id: `${res[index].dance_class_id}`,
                 dance_name: `${res[index].dance_name}`,
                 dance_genre: `${res[index].dance_genre}`,
@@ -188,9 +182,17 @@ danceClass.getAllRecordedDanceClassOffering = (callback) => {
                 first_name: `${res[index].first_name}`,
                 last_name: `${res[index].last_name}`,
                 dance_specialty: `${res[index].dance_specialty}`,
+                user_id: `${res[index].user_id}`,
+                gender: `${res[index].gender}`,
+                contact_number: `${res[index].contact_number}`,
+                email_address: `${res[index].email_address}`,
+                data_of_birth: `${res[index].data_of_birth}`,
+                rating: `${res[index].rating}`,
+                description: `${res[index].description}`,
+                profile_picture: `${res[index].profile_picture}`
+
             }    
             
-
             const paymentDetailsJson = {
                 payment_details_id: `${res[index].payment_details_id}`,
                 mode_of_payment: `${res[index].mode_of_payment}`,
@@ -200,20 +202,14 @@ danceClass.getAllRecordedDanceClassOffering = (callback) => {
             singleClassJson['instructor'] = instructorInfoJson
             singleClassJson['payment'] = paymentDetailsJson
 
-            switch (daysBetween) {
-                case 0:
-                    danceClassJson.happening_today.push(singleClassJson)
-                    break;
-                case 1:
-                    danceClass.upcoming_classes.push(singleClassJson)
-                    break;
-                default:
-                    danceClass.classes_done.push(singleClassJson)
-                    break;
+            temp.push(singleClassJson)
+
+            if(temp.length == res.length){
+                callback(null,temp)
+
             }
 
         }
-        callback(null,danceClassJson)
     })     
 }
 

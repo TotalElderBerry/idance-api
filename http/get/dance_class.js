@@ -12,6 +12,16 @@ app.get('/live/all', (req,res) => {
     })
 })
 
+app.get('/recorded/all', (req,res) => {
+    danceClass.getAllRecordedDanceClassOffering((myErr,data) => {
+        if(myErr){
+            return res.status(400).send(err)
+        }
+        res.status(200).send(data)
+    })
+})
+
+
 app.get('/live/:id', (req,res) => {
     const dance_class_id = req.params.id
     const {student_id} = req.body
