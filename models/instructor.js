@@ -24,8 +24,19 @@ instructorModel.getAllInstructors = (callback) => {
 
     db_conn.query(query,(err,res) => {
         let instructors = []
+        console.log(res.length);
         for(r in res){
-            let singleInstruct = {}
+            let instructor ={}
+            instructorModel.getUserInstructorbyId(res[r].user_id,(err,instructorResult) => {
+                if(err) throw err
+                instructor = instructorResult[0]
+                instructor.instructor_id += ""
+                instructor.rating += ""
+                instructors.push(instructor)
+                if(res.length == instructors.length){
+                    callback(instructors)
+                }                
+            })
         }
     })
 }

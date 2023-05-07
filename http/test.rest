@@ -72,8 +72,13 @@ content-type: application/json
 GET http://localhost:8000/api/dance-class/recorded/all HTTP/1.1
 content-type: application/json
 
+
 ###
-GET http://localhost:8000/api/instructor/xx22id HTTP/1.1
+GET http://localhost:8000/api/instructor/all HTTP/1.1
+content-type: application/json
+
+###
+GET http://localhost:8000/api/instructor/DfTmRA5ftbQooYwlwiGXUcrzQlZ2 HTTP/1.1
 content-type: application/json
 
 ###
@@ -106,3 +111,16 @@ GET http://localhost:8000/api/dance-class/5/attendance HTTP/1.1
 content-type: application/json
 
 # const {dance_name, dance_genre, dance_song, dance_difficulty, date,location,price,description,student_limit, mode_of_payment,account_name,account_number} = newDanceClass;
+
+###
+POST http://localhost:8000/api/rating/instructor/54/ HTTP/1.1
+content-type: application/json
+
+{
+    "student_id": 29,
+    "rating": 5
+}
+
+###
+GET http://localhost:8000/api/like/class/10 HTTP/1.1
+content-type: application/json

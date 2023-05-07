@@ -5,7 +5,13 @@ const paymentModel = require('../../models/payment')
 const app = express()
 
 app.get('/all', (req,res) => {
+    instructorModel.getAllInstructors((r) => {
+        if(res.length == 0){
+            return res.status(200).send([])
+        }
+        return res.status(200).send(r)
 
+    })
 })
 
 
