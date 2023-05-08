@@ -5,7 +5,7 @@ const app = express()
 
 app.get('/class/:dance_class_id/student/:student_id', (req,res) => {
     
-    like.getLike(req.params.dance_class_id, req.params.student_id, (val) => {
+    like.getLike(req.params.student_id, req.params.dance_class_id, (val) => {
         res.status(200).send({val})
     })
 
