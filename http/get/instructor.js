@@ -69,6 +69,41 @@ app.get('/:id/live', (req,response) => {
     })
 })
 
+app.get('/:id/recorded', (req,response) => {
+    const instructorId = req.params.id;
+    instructorModel.getRecordedDanceClassesOfInstructor(instructorId, (err,res) => {
+        if(err) throw err
+        if(res.length == 0){
+            response.send([])
+        }
+        classes = []
+        for(const index in res){
+            
+            const singleClassJson = {
+                dance_id: `${res[index].dance_class_id}`,
+                youtube_link: `${res[index].youtube_link}`,
+                recorded_danceclass_id: `${res[index].recorded_danceclass_id}`,
+                dance_name: `${res[index].dance_name}`,
+                dance_genre: `${res[index].dance_genre}`,
+                dance_difficulty: `${res[index].dance_difficulty}`,
+                price: `${res[index].price}`,
+                description: `${res[index].description}`,
+            }
+            paymentModel.getPaymentDetailsById(res[index].payment_details_id, (payment) => {
+                singleClassJson['payment'] = payment
+                classes.push(singleClassJson)
+                console.log(singleClassJson)
+                if(classes.length == res.length){
+                    response.status(200).send(classes)
+                }
+                return
+            })
+        }
+        return
+    })
+   
+})
+
 
 //instructor profile
 

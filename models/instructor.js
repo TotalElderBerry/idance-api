@@ -77,6 +77,24 @@ instructorModel.getLiveDanceClassesOfInstructor = (id, callback) => {
     })
 }
 
+instructorModel.getRecordedDanceClassesOfInstructor = (id, callback) => {
+    const query = `select * from recordeddanceclass inner join danceclass on recordeddanceclass.dance_class_id = danceclass.dance_class_id where danceclass.instructor_id = ${id}`
+
+    db_conn.query(query,(err,res) => {
+        if(err){
+            callback(err,null)
+            return
+        }
+        if(res){
+            callback(null,res)
+            return
+        }
+        callback({type: 'no classes'},null)
+    })
+}
+
+
+
 instructorModel.acceptStudentDanceBooking = (student_id, dance_class_id) => {
     const dateNow = formatDate("");
     const query = `update dancebooking set date_approved = '${dateNow}' where student_id = ${student_id} and dance_class_id = ${dance_class_id}`
