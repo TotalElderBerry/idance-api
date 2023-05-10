@@ -155,6 +155,10 @@ danceClass.getAllRecordedDanceClassOffering = (callback) => {
             callback(err,null)
             return
         }
+        if(res.length == 0){
+            callback(null,[])
+            return
+        }
         console.log(res);
         const temp = []
         for(const index in res){
@@ -206,7 +210,6 @@ danceClass.getAllRecordedDanceClassOffering = (callback) => {
 
             if(temp.length == res.length){
                 callback(null,temp)
-
             }
 
         }

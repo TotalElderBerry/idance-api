@@ -17,6 +17,10 @@ app.get('/recorded/all', (req,res) => {
         if(myErr){
             return res.status(400).send(err)
         }
+        if(data.length == 0){
+            res.status(200).send([])
+            return
+        }
         res.status(200).send(data)
     })
 })
