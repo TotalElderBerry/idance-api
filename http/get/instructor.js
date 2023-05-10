@@ -85,6 +85,7 @@ app.get('/:id/recorded', (req,response) => {
                 recorded_danceclass_id: `${res[index].recorded_danceclass_id}`,
                 dance_name: `${res[index].dance_name}`,
                 dance_genre: `${res[index].dance_genre}`,
+                dance_song: `${res[index].dance_song}`,
                 dance_difficulty: `${res[index].dance_difficulty}`,
                 price: `${res[index].price}`,
                 description: `${res[index].description}`,
