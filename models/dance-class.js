@@ -231,13 +231,21 @@ danceClass.getDanceClassBookingStudents = (dance_class_id , callback) => {
         res.forEach(element => {
             console.log(element.student_id);
             studentModel.getStudentbyStudentId(element.student_id,(err,student)=>{
-                element.student = student[0];
-                // console.log(element);
-                returnResult.push(element)
-                if(returnResult.length == res.length){
-                    callback(res)
-                    return
-                }
+                const query = `select reference_number from payment where payment_id = ${element.payment_id}`
+                db_conn.query(query,(err,refNum) => {
+                    if(err) throw err
+                    if(refNum.length > 0){
+                        element.student = student[0];
+                        console.log(refNum[0]);
+                        element.reference_number = refNum[0].reference_number
+                        // console.log(element);
+                        returnResult.push(element)
+                        if(returnResult.length == res.length){
+                            callback(res)
+                            return
+                        }
+                    }
+                })
             })
         });
     })
