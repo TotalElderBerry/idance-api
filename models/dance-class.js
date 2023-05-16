@@ -279,4 +279,14 @@ danceClass.getStudentsAttended = (live_dance_class_id, callback) => {
     })
 
 }
+
+danceClass.updateLiveDanceClass = (danceClassId, fields, callback) => {
+
+}
+
+danceClass.updateRecordedDanceClass = (danceClassId, fields, callback) => {
+    
+}
+
+
 module.exports = danceClass

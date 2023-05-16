@@ -65,6 +65,25 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMHVmM
 }
 
 ###
+PUT http://localhost:8000/api/dance-class/add/live HTTP/1.1
+content-type: application/json
+
+{
+    "instructor_id": 24,
+    "dance_name": "Cupid Tiktok",
+    "dance_song": "Cupid",
+    "dance_difficulty": "Hard",
+    "date": "2024-01-01",
+    "location": "Talamban",
+    "price": "400",
+    "description": "Forda Tiktok",
+    "student_limit": 20,
+    "mode_of_payment": "Paypal",
+    "account_name": "Brian",
+    "account_number": "12345"
+}
+
+###
 GET http://localhost:8000/api/dance-class/live/all HTTP/1.1
 content-type: application/json
 
