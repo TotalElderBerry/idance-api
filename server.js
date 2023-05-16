@@ -16,6 +16,7 @@ const instructorDelete = require('./http/delete/instructor')
 //dance class
 const danceClassGet = require('./http/get/dance_class')
 const danceClassPost = require('./http/post/dance_class')
+const danceClassPut = require('./http/put/danceclass');
 
 
 //attendance
@@ -37,7 +38,7 @@ app.use(express.json())
 
 app.use("/api/student",studentGet,studentPost,studentPut,studentDelete)
 app.use('/api/instructor', instructorGet,instructorPost,instructorDelete,instructorPut)
-app.use('/api/dance-class',danceClassGet, danceClassPost)
+app.use('/api/dance-class',danceClassGet, danceClassPost, danceClassPut)
 app.use('/api/attendance', attendanceGet,attendancePost)
 app.use('/api/rating', ratingPost)
 app.use('/api/like', likeGet,likePost)

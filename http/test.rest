@@ -12,6 +12,31 @@ content-type: application/json
     "level": "Exaspert"
 }
 
+###
+
+PUT http://localhost:8000/api/student/28 HTTP/1.1
+content-type: application/json
+
+{
+    "user_id": "GqxBv47LlRYkg6F0cSua5S53h4Z2",
+    "firstName": "Andrew",
+    "lastName": "Tate",
+    "gender": "Male",
+    "contactNumber" : "09154516111",
+    "dateOfBirth": "2006-04-12",
+    "level": "Medium"
+}
+
+###
+
+PUT http://localhost:8000/api/instructor/54 HTTP/1.1
+content-type: application/json
+
+{
+    "user_id": "GqxBv47LlRYkg6F0cSua5S53h4Z2",
+    "description": "I am the world's best dancer"
+}
+
 
 ###
 POST http://localhost:8000/api/instructor/add HTTP/1.1
@@ -65,11 +90,12 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMHVmM
 }
 
 ###
-PUT http://localhost:8000/api/dance-class/add/live HTTP/1.1
+PUT http://localhost:8000/api/dance-class/live/5 HTTP/1.1
 content-type: application/json
 
 {
     "instructor_id": 24,
+    "danceclass_id": 10,
     "dance_name": "Cupid Tiktok",
     "dance_song": "Cupid",
     "dance_difficulty": "Hard",
@@ -78,6 +104,24 @@ content-type: application/json
     "price": "400",
     "description": "Forda Tiktok",
     "student_limit": 20,
+    "mode_of_payment": "Paypal",
+    "account_name": "Brian",
+    "account_number": "12345"
+}
+
+###
+PUT http://localhost:8000/api/dance-class/recorded/5 HTTP/1.1
+content-type: application/json
+
+{
+    "instructor_id": 24,
+    "danceclass_id": 18,
+    "dance_name": "Cupid Tiktok",
+    "dance_song": "Cupid",
+    "dance_difficulty": "Hard",
+    "youtube_link": "https://www.youtube.com/watch?v=GYLQCCJBCIU",
+    "price": "400",
+    "description": "Forda Tiktok",
     "mode_of_payment": "Paypal",
     "account_name": "Brian",
     "account_number": "12345"

@@ -105,5 +105,15 @@ instructorModel.acceptStudentDanceBooking = (student_id, dance_class_id) => {
     })
 }
 
+instructorModel.updateInstructor = (instructorId, field, callback) => {
+    const {description} = field
+    const query = `UPDATE instructor set description = ? where instructor_id = ${instructorId}`
+
+    db_conn.query(query,[description], (err,res) => {
+        if(err) throw err
+        callback({message: "okay"})
+    })
+}
+
 
 module.exports = instructorModel

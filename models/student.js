@@ -83,4 +83,18 @@ studentModel.getStudentDanceClassbyId = (student_id, callback) => {
     })
 }
 
+studentModel.updateStudent = (studentId, fields, callback) => {
+    const {user_id, firstName, lastName, gender, contactNumber, emailAddress, dateOfBirth, profilePicture, level} = fields;
+    const query = `UPDATE student set level = ? where student_id = ${studentId}`
+
+    db_conn.query(query,[level],(err,res) => {
+        if(err) throw err
+        const query = `UPDATE user set first_name = ?, last_name = ?, gender = ?, contact_number = ?, data_of_birth = ? where user_id = "${user_id}"`
+        db_conn.query(query, [firstName, lastName, gender, contactNumber, dateOfBirth], (err,anotherRes) => {
+            if(err) throw err
+            callback({message: "okay"})
+        })
+    })
+}
+
 module.exports = studentModel

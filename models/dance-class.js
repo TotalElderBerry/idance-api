@@ -280,12 +280,33 @@ danceClass.getStudentsAttended = (live_dance_class_id, callback) => {
 
 }
 
-danceClass.updateLiveDanceClass = (danceClassId, fields, callback) => {
 
+danceClass.updateLiveDanceClass = (danceClassId, fields, callback) => {
+    const {dance_name, dance_genre, dance_song, dance_difficulty, date,location,price,description,student_limit, mode_of_payment,account_name,account_number, danceclass_id} = fields
+    const query = `UPDATE livedanceclass set date = ?, location = ?, student_limit = ? where live_danceclass_id = ${danceClassId}`
+
+    db_conn.query(query,[date,location, student_limit], (err,res) => {
+        if(err) throw err
+        const query = `UPDATE danceclass set dance_name = ?, dance_genre = ?, dance_song = ?, dance_difficulty = ?, price = ?, description = ? where dance_class_id = ${danceclass_id}`
+        db_conn.query(query,[dance_name, dance_genre, dance_song, dance_difficulty,price,description],(err, anotherRes) => {
+            if(err) throw err
+            callback({message: "success"})
+        })
+    })
 }
 
-danceClass.updateRecordedDanceClass = (danceClassId, fields, callback) => {
-    
+danceClass.updateRecordedDanceClass = (recordedClassId, fields, callback) => {
+    const {dance_name, dance_genre, dance_song, dance_difficulty, youtube_link,price,description,mode_of_payment,account_name,account_number, danceclass_id} = fields
+    const query = `UPDATE recordeddanceclass set youtube_link = ? where recorded_danceclass_id = ${recordedClassId}`
+
+    db_conn.query(query,[youtube_link], (err,res) => {
+        if(err) throw err
+        const query = `UPDATE danceclass set dance_name = ?, dance_genre = ?, dance_song = ?, dance_difficulty = ?, price = ?, description = ? where dance_class_id = ${danceclass_id}`
+        db_conn.query(query,[dance_name, dance_genre, dance_song, dance_difficulty,price,description],(err, anotherRes) => {
+            if(err) throw err
+            callback({message: "success"})
+        })
+    })
 }
 
 

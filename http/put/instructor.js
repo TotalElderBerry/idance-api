@@ -13,4 +13,15 @@ app.put('/live/:dance_class_id/accept-student', (req,res) => {
     }
 })
 
+app.put('/:instructorId', (req,res) => {
+    const instructorId = req.params.instructorId
+    // studentModel.updateStudent(studentId, req.body, (message) => {
+    //     res.send(message)
+    // })
+    instructorModel.updateInstructor(instructorId, req.body, (message) => {
+        res.send(message)
+    })
+})
+
+
 module.exports = app
