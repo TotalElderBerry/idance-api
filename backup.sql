@@ -19,6 +19,15 @@
 -- Table structure for table `attendance`
 --
 
+CREATE TABLE notifications (
+  notification_id int not null AUTO_INCREMENT,
+  user_id varchar(50) DEFAULT NULL,
+  msg text DEFAULT NULL,
+  notif_type int DEFAULT NULL,
+  PRIMARY KEY (notification_id),
+   FOREIGN KEY (user_id) REFERENCES user(user_id)
+);
+
 DROP TABLE IF EXISTS `attendance`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
