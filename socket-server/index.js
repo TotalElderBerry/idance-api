@@ -3,9 +3,9 @@ const notificationModel = require('../models/notification');
 const io = new Server()
 
 io.on("connection", (socket) => {
-
+    console.log(`Connected with ${socket.id}`);
     socket.on("add_dance_booking", (notif) => {
-        socket.emit("send-notification", notif);
+        socket.broadcast.emit("send-notification", notif);
         notificationModel.addNotification(notif,(msg) => {
             console.log("will emit");
         })
