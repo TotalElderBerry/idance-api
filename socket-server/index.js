@@ -10,6 +10,13 @@ io.on("connection", (socket) => {
             console.log("will emit");
         })
     })
+
+    socket.on("accept_pending_student", (notif) => {
+        socket.broadcast.emit("send-student-notification", notif);
+        notificationModel.addNotification(notif,(msg) => {
+            console.log("will emit");
+        })
+    })
     
     socket.on('msg', (data) => {
         console.log(data);

@@ -32,6 +32,9 @@ const ratingPost = require('./http/post/rating')
 //attendance
 const likeGet = require('./http/get/like')
 const likePost = require('./http/post/like')
+
+//notifs
+const notificationGet = require('./http/get/notifications')
 const app = express()
 app.use(express.json())
 
@@ -42,6 +45,7 @@ app.use('/api/dance-class',danceClassGet, danceClassPost, danceClassPut)
 app.use('/api/attendance', attendanceGet,attendancePost)
 app.use('/api/rating', ratingPost)
 app.use('/api/like', likeGet,likePost)
+app.use('/api/notification', notificationGet)
 
 app.listen(8000, ()=>{
     console.log('Listening sa port 8000');
