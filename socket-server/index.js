@@ -5,16 +5,17 @@ const io = new Server()
 io.on("connection", (socket) => {
     console.log(`Connected with ${socket.id}`);
     socket.on("add_dance_booking", (notif) => {
+        console.log("new notif: "+JSON.stringify(notif)+" "+socket.id);
         socket.broadcast.emit("send-notification", notif);
-        notificationModel.addNotification(notif,(msg) => {
-            console.log("will emit");
-        })
+        console.log("will notif emit");
+        // notificationModel.addNotification(notif,(msg) => {
+        // })
     })
 
     socket.on("accept_pending_student", (notif) => {
-        socket.broadcast.emit("send-student-notification", notif);
+        io.emit("send-student-notification", notif);
         notificationModel.addNotification(notif,(msg) => {
-            console.log("will emit");
+            console.log("will accept emit");
         })
     })
     
