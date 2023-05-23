@@ -6,7 +6,7 @@ io.on("connection", (socket) => {
     console.log(`Connected with ${socket.id}`);
     socket.on("add_dance_booking", (notif) => {
         console.log("new notif: "+JSON.stringify(notif)+" "+socket.id);
-        socket.broadcast.emit("send-notification", notif);
+        io.emit("send-notification", notif);
         console.log("will notif emit");
         // notificationModel.addNotification(notif,(msg) => {
         // })
