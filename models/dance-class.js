@@ -66,7 +66,7 @@ danceClass.addRecordedDanceClass = (instructorId, newDanceClass) => {
 }
 
 danceClass.getAllUpcomingDanceClass = (callback) => {
-    const query = 'select * from (danceclass inner join livedanceclass on danceclass.dance_class_id = livedanceclass.dance_class_id inner join instructor on instructor.instructor_id = danceclass.instructor_id) inner join user on user.user_id = instructor.user_id inner join paymentdetails on danceclass.payment_details_id = paymentdetails.payment_details_id'
+    const query = 'select *, d.description as dance_description from (danceclass d inner join livedanceclass on d.dance_class_id = livedanceclass.dance_class_id inner join instructor on instructor.instructor_id = d.instructor_id) inner join user on user.user_id = instructor.user_id inner join paymentdetails on d.payment_details_id = paymentdetails.payment_details_id'
 
     db_conn.query(query, (err,res,fields)=>{
         if(err) {
@@ -87,6 +87,7 @@ danceClass.getAllUpcomingDanceClass = (callback) => {
             const formattedToday = formatDate(today)
             console.log(`Number of days between: ${formattedToday} and ${res[index].date}`);
             console.log(differenceOfDaysBetweenDates(formattedToday,res[index].date));
+            console.log(JSON.stringify(res[index]));
             let daysBetween = differenceOfDaysBetweenDates(formattedToday,res[index].date);
             
             const singleClassJson = {
@@ -99,7 +100,7 @@ danceClass.getAllUpcomingDanceClass = (callback) => {
                 date: `${res[index].date}`,
                 location: `${res[index].location}`,
                 price: `${res[index].price}`,
-                description: `${res[index].description}`,
+                description: `${res[index].dance_description}`,
                 student_limit: `${res[index].student_limit}`
             }
             
@@ -148,7 +149,7 @@ danceClass.getAllUpcomingDanceClass = (callback) => {
 }
 
 danceClass.getAllRecordedDanceClassOffering = (callback) => {
-    const query = 'select * from (danceclass inner join recordeddanceclass on danceclass.dance_class_id = recordeddanceclass.dance_class_id inner join instructor on instructor.instructor_id = danceclass.instructor_id) inner join user on user.user_id = instructor.user_id inner join paymentdetails on danceclass.payment_details_id = paymentdetails.payment_details_id'
+    const query = 'select *, d.description as dance_description from (danceclass d inner join recordeddanceclass on d.dance_class_id = recordeddanceclass.dance_class_id inner join instructor on instructor.instructor_id = d.instructor_id) inner join user on user.user_id = instructor.user_id inner join paymentdetails on d.payment_details_id = paymentdetails.payment_details_id'
 
     db_conn.query(query, (err,res,fields)=>{
         if(err) {
@@ -176,7 +177,7 @@ danceClass.getAllRecordedDanceClassOffering = (callback) => {
                 dance_song: `${res[index].dance_song}`,
                 dance_difficulty: `${res[index].dance_difficulty}`,
                 price: `${res[index].price}`,
-                description: `${res[index].description}`,
+                description: `${res[index].dance_description}`,
                 youtube_link: `${res[index].youtube_link}`,
             }
             

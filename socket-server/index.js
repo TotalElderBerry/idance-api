@@ -4,7 +4,7 @@ const io = new Server()
 
 io.on("connection", (socket) => {
     console.log(`Connected with ${socket.id}`);
-    socket.on("add_dance_booking", (notif) => {
+    socket.broadcast.on("add_dance_booking", (notif) => {
         console.log("new notif: "+JSON.stringify(notif)+" "+socket.id);
         io.emit("send-notification", notif);
         console.log("will notif emit");
@@ -14,14 +14,14 @@ io.on("connection", (socket) => {
     })
 
     socket.on("accept_pending_student", (notif) => {
-        io.emit("send-student-notification", notif);
+        socket.broadcast.emit("send-student-notification", notif);
         notificationModel.addNotification(notif,(msg) => {
             console.log("will accept emit");
         })
     })
 
     socket.on("request_cancel_booking", (notif) => {
-        io.emit("send-cancelbooking-notification", notif);
+        socket.broadcast.emit("send-cancelbooking-notification", notif);
         notificationModel.addNotification(notif,(msg) => {
             console.log("will accept emit");
         })
