@@ -9,6 +9,16 @@ app.put('/:studentId', (req,res) => {
     })
 })
 
+app.put('/:studentId/live/:danceClassId', (req,res) => {
+    try {
+        studentModel.cancelBooking(req.params.studentId, req.params.danceClassId, (msg) => {
+            res.send(msg)
+        })
+    } catch (error) {
+        
+    }
+})
+
 
 
 

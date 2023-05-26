@@ -105,6 +105,24 @@ instructorModel.acceptStudentDanceBooking = (student_id, dance_class_id) => {
     })
 }
 
+instructorModel.rejectCancellationRequest = (student_id, dance_class_id) => {
+    const query = `update dancebooking set date_approved = 'PENDING' where student_id = ${student_id} and dance_class_id = ${dance_class_id}`
+
+    db_conn.query(query,(err,res) => {
+        if(err) throw err
+        return "success"
+    })
+}
+
+instructorModel.acceptCancellationRequest = (student_id, dance_class_id) => {
+    const query = `delete from dancebooking where student_id = ${student_id} and dance_class_id = ${dance_class_id}`
+
+    db_conn.query(query,(err,res) => {
+        if(err) throw err
+        return "success"
+    })
+}
+
 instructorModel.updateInstructor = (instructorId, field, callback) => {
     const {description} = field
     const query = `UPDATE instructor set description = ? where instructor_id = ${instructorId}`

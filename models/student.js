@@ -97,4 +97,13 @@ studentModel.updateStudent = (studentId, fields, callback) => {
     })
 }
 
+studentModel.cancelBooking = (studentId, danceClassId, callback) => {
+    const query = `UPDATE dancebooking set date_approved = 'CANCELLED' where student_id = ${studentId} and dance_class_id = ${danceClassId}`
+
+    db_conn.query(query,(err,res) => {
+        if(err) throw err
+        callback({message: "cancellation okay"})
+    })
+}
+
 module.exports = studentModel
