@@ -8,8 +8,9 @@ io.on("connection", (socket) => {
         console.log("new notif: "+JSON.stringify(notif)+" "+socket.id);
         socket.broadcast.emit("send-notification", notif);
         console.log("will notif emit");
-        // notificationModel.addNotification(notif,(msg) => {
-        // })
+        notificationModel.addNotification(notif,(msg) => {
+            console.log(msg);
+        })
     })
 
     socket.on("accept_pending_student", (notif) => {
@@ -18,7 +19,35 @@ io.on("connection", (socket) => {
             console.log("will accept emit");
         })
     })
+
+    socket.on("request_cancel_booking", (notif) => {
+        io.emit("send-cancelbooking-notification", notif);
+        notificationModel.addNotification(notif,(msg) => {
+            console.log("will accept emit");
+        })
+    })
     
+    socket.on("accept_cancellation_request", (notif) => {
+        socket.broadcast.emit("send-acceptcancel-notification", notif)
+        notificationModel.addNotification(notif,(msg) => {
+            console.log(msg);
+        })
+        notificationModel.addNotification(notif,(msg) => {
+            console.log(msg);
+        })
+    })
+
+    socket.on("reject_cancellation_request", (notif) => {
+        socket.broadcast.emit("send-rejectcancel-notification", notif)
+        notificationModel.addNotification(notif,(msg) => {
+            console.log(msg);
+        })
+        notificationModel.addNotification(notif,(msg) => {
+            console.log(msg);
+        })
+    })
+
+
     socket.on('msg', (data) => {
         console.log(data);
     })
